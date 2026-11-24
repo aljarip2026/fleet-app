@@ -64,7 +64,7 @@ button.red{background:#fee2e2;color:#991b1b}button.green{background:#dcfce7;colo
 .editing{border:2px solid #f59e0b !important;box-shadow:0 0 0 4px rgba(245,158,11,.25)}
 
 @media print{
-  @page{size:A4;margin:8mm}
+  @page{size:A4;margin:5mm}
   body *{visibility:hidden}
   #reportPage, #reportPage *{visibility:visible}
   #reportPage{position:absolute;left:0;top:0;width:100%;background:#fff}
@@ -72,8 +72,11 @@ button.red{background:#fee2e2;color:#991b1b}button.green{background:#dcfce7;colo
   #reportPage button{display:none !important}
   nav, header, main{display:none !important}
   #reportPageContent{width:100% !important;overflow:visible !important}
-  #reportPageContent table{width:100% !important;table-layout:fixed !important;border-collapse:collapse}
-  #reportPageContent th, #reportPageContent td{font-size:9px !important;padding:4px 3px !important;word-break:break-word !important;overflow-wrap:break-word !important;white-space:normal !important;border:1px solid #333}
+  #reportPageContent table{width:100% !important;min-width:0 !important;max-width:100% !important;table-layout:fixed !important;border-collapse:collapse}
+  #reportPageContent th, #reportPageContent td{font-size:7.5px !important;line-height:1.3 !important;padding:2px 1px !important;word-break:break-word !important;overflow-wrap:break-word !important;white-space:normal !important;border:1px solid #333}
+  #reportPageContent .scroll-table-wrap table{width:100% !important;min-width:0 !important}
+  #reportPageContent .doc{width:100% !important;max-width:100% !important;padding:0 !important}
+  #reportPageContent h2{font-size:14px !important} #reportPageContent h3{font-size:11px !important} #reportPageContent p{font-size:9px !important}
   #reportPageContent .hint, #reportPageContent [class*="hint"]{display:none !important}
   #reportPageContent div[style*="background:#fef9c3"], #reportPageContent div[style*="background:#fef3c7"]{display:none !important}
   #reportPageContent{font-size:11px}
