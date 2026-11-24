@@ -122,7 +122,7 @@ public class MainActivity extends Activity {
                         ContentValues values = new ContentValues();
                         values.put(MediaStore.Downloads.DISPLAY_NAME, fileName);
                         values.put(MediaStore.Downloads.MIME_TYPE, fileName.endsWith(".json") ? "application/json" : "text/html");
-                        values.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS);
+                        values.put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/صيانة القواطر");
                         Uri uri = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
                         if (uri != null) {
                             OutputStream os = getContentResolver().openOutputStream(uri);
@@ -130,14 +130,14 @@ public class MainActivity extends Activity {
                             savedUri = uri;
                         }
                     } else {
-                        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "صيانة القواطر");
                         if (!dir.exists()) dir.mkdirs();
                         File f = new File(dir, fileName);
                         FileOutputStream fos = new FileOutputStream(f);
                         fos.write(data); fos.close();
                         savedUri = Uri.fromFile(f);
                     }
-                    Toast.makeText(MainActivity.this, "تم الحفظ في التنزيلات: " + fileName, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "تم الحفظ في مجلد صيانة القواطر: " + fileName, Toast.LENGTH_LONG).show();
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, "تعذر حفظ الملف", Toast.LENGTH_SHORT).show();
                 }
