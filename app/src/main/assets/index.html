@@ -83,6 +83,8 @@ button.red{background:#fee2e2;color:#991b1b}button.green{background:#dcfce7;colo
   #reportPageContent tr{page-break-inside:auto !important;page-break-after:auto !important}
   #reportPageContent thead{display:table-header-group !important;break-inside:avoid !important}
   #reportPageContent table{break-inside:auto !important}
+  #reportPageContent .report-chunk{break-after:page !important;page-break-after:always !important}
+  #reportPageContent .report-chunk:last-child{break-after:auto !important;page-break-after:auto !important}
   #reportPageContent tfoot{display:table-footer-group !important}
   #reportPageContent .scroll-table-wrap{overflow:visible !important;max-height:none !important}
   #reportPage .box{box-shadow:none;max-width:100%;margin:0;padding:0;min-height:0 !important}
@@ -95,7 +97,7 @@ button.red{background:#fee2e2;color:#991b1b}button.green{background:#dcfce7;colo
   nav, header, main{display:none !important}
   #reportPageContent{width:100% !important;overflow:visible !important}
   #reportPageContent table{width:100% !important;min-width:0 !important;max-width:100% !important;table-layout:fixed !important;border-collapse:collapse}
-  #reportPageContent th, #reportPageContent td{font-size:12px !important;line-height:1.5 !important;padding:6px 3px !important;word-break:break-word !important;overflow-wrap:break-word !important;white-space:normal !important;border:1px solid #333}
+  #reportPageContent th{background:#0f2447 !important;color:#fff !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important} #reportPageContent td{font-size:12px !important;line-height:1.5 !important;padding:6px 3px !important;word-break:break-word !important;overflow-wrap:break-word !important;white-space:normal !important;border:1px solid #333}
   #reportPageContent .scroll-table-wrap table{width:100% !important;min-width:0 !important}
   #reportPageContent .doc{width:100% !important;max-width:100% !important;padding:0 !important}
   #reportPageContent h2{font-size:16px !important} #reportPageContent h3{font-size:13px !important} #reportPageContent p{font-size:11px !important}
@@ -164,11 +166,11 @@ body[data-theme="dark"] nav button{color:#cbd5e1}
 <div class="card"><b>⚠️ تنبيهات الزيت (كل 4000 كم)</b><div id="alerts"></div></div>
 <div class="card"><b>آخر سجل محفوظ</b><div id="lastLog">—</div></div>
 <div class="card"><b>القواطر</b><div id="homeTrucks"></div></div></section>
-<section data-tab="trucks" class="hidden"><button class="btn" onclick="openTruckForm()">➕ إضافة قاطرة جديدة</button><div id="truckList"></div>
+<section data-tab="trucks" class="hidden"><button class="btn" onclick="openTruckForm()">➕ إضافة قاطرة جديدة</button>
 <div id="truckForm" class="card hidden"><h3 id="truckFormTitle">إضافة قاطرة</h3><input id="t_name" placeholder="اسم القاطرة *"><input id="t_plate" placeholder="اللوحة"><input id="t_model" placeholder="الموديل"><input id="t_driver" placeholder="السائق">
 <label>تاريخ الفحص</label><button class="ghost" onclick="pickDate('t_insp')">📅 اختر تاريخ الفحص: <span id="t_insp_lbl">بدون تاريخ</span></button><input type="hidden" id="t_insp">
 <label>تاريخ التأمين</label><button class="ghost" onclick="pickDate('t_ins')">📅 اختر تاريخ التأمين: <span id="t_ins_lbl">بدون تاريخ</span></button><input type="hidden" id="t_ins">
-<textarea id="t_notes" placeholder="ملاحظات"></textarea><input type="hidden" id="t_id"><button class="btn" onclick="saveTruck()">💾 حفظ القاطرة</button><button class="ghost" onclick="hideTruckForm()">إلغاء</button></div></section>
+<textarea id="t_notes" placeholder="ملاحظات"></textarea><input type="hidden" id="t_id"><button class="btn" onclick="saveTruck()">💾 حفظ القاطرة</button><button class="ghost" onclick="hideTruckForm()">إلغاء</button></div><div id="truckList"></div></section>
 <section data-tab="maint" class="hidden"><button class="btn" onclick="openLogForm()">➕ إضافة سجل صيانة</button>
 <input id="sQuick" placeholder="🔍 بحث سريع... اسم القاطرة أو الصيانة أو القطع أو الفاتورة أو التكلفة">
 <div class="row date-row"><button class="ghost" onclick="pickDate('f_from')">📅 من: <span id="f_from_lbl">الكل</span></button><button class="ghost" onclick="pickDate('f_to')">📅 إلى: <span id="f_to_lbl">الكل</span></button><button class="ghost" onclick="clearFilters()">مسح الفلاتر</button></div>
@@ -301,7 +303,7 @@ function quickDate(k){if(k==='all'){clearDate();return;} setDateVal(new Date().t
 function setDateVal(iso){if(!dateTarget) return; let el=document.getElementById(dateTarget); if(!el) return; el.value=iso; let lbl=document.getElementById(dateTarget+'_lbl'); if(lbl) lbl.textContent=iso; closeModal('dateModal'); toast('تم اختيار التاريخ: '+iso);}
 function confirmDate(){let iso=String(selY).padStart(4,'0')+'-'+String(selM).padStart(2,'0')+'-'+String(selD).padStart(2,'0'); setDateVal(iso);}
 function clearDate(){if(!dateTarget) return; let el=document.getElementById(dateTarget); if(el) el.value=''; let lbl=document.getElementById(dateTarget+'_lbl'); if(lbl) lbl.textContent='الكل / بدون'; closeModal('dateModal');}
-function openTruckForm(){tab('trucks'); document.getElementById('truckForm').classList.remove('hidden'); document.getElementById('truckFormTitle').textContent='إضافة قاطرة'; ['t_name','t_plate','t_model','t_driver','t_notes','t_id','t_insp','t_ins'].forEach(id=>document.getElementById(id).value='');}
+function openTruckForm(){tab('trucks'); document.getElementById('truckForm').classList.remove('hidden'); setTimeout(()=>{window.scrollTo({top:0,behavior:'smooth'}); document.getElementById('truckForm').scrollIntoView({behavior:'smooth',block:'start'}); let _n=document.getElementById('t_name'); if(_n) _n.focus();},80); document.getElementById('truckFormTitle').textContent='إضافة قاطرة'; ['t_name','t_plate','t_model','t_driver','t_notes','t_id','t_insp','t_ins'].forEach(id=>document.getElementById(id).value='');}
 function hideTruckForm(){document.getElementById('truckForm').classList.add('hidden');}
 function saveTruck(){let name=document.getElementById('t_name').value.trim(); if(!name){toast('اكتب اسم القاطرة أولا',1);return;} let id=document.getElementById('t_id').value; if(id){let t=S.trucks.find(x=>x.id==id); let old=t.name; t.name=name; t.plate=document.getElementById('t_plate').value; t.model=document.getElementById('t_model').value; t.driver=document.getElementById('t_driver').value; t.insp=document.getElementById('t_insp').value; t.ins=document.getElementById('t_ins').value; t.notes=document.getElementById('t_notes').value; S.logs.forEach(l=>{if(truckMatch(l.truck,old)) l.truck=name;});} else {S.trucks.push({id:Date.now(),name,plate:document.getElementById('t_plate').value,model:document.getElementById('t_model').value,driver:document.getElementById('t_driver').value,insp:document.getElementById('t_insp').value,ins:document.getElementById('t_ins').value,notes:document.getElementById('t_notes').value,last_oil:0});} saveLocal(); hideTruckForm(); toast('💾 تم حفظ القاطرة محليا ✓'); render();}
 function editTruck(id){if(S.settings&&S.settings.allowEdit===false){toast('التعديل مقفل من الإعدادات 🔒',1);return;}let t=S.trucks.find(x=>x.id===id); if(!t){toast('القاطرة غير موجودة',1);return;} openTruckForm(); document.getElementById('truckFormTitle').textContent='تعديل قاطرة'; document.getElementById('t_id').value=t.id; document.getElementById('t_name').value=t.name; document.getElementById('t_plate').value=t.plate||''; document.getElementById('t_model').value=t.model||''; document.getElementById('t_driver').value=t.driver||''; document.getElementById('t_notes').value=t.notes||''; document.getElementById('t_insp').value=t.insp||''; document.getElementById('t_ins').value=t.ins||''; setTimeout(()=>{let f=document.getElementById('truckForm'); if(f) f.scrollIntoView({behavior:'smooth',block:'start'});},80);}
@@ -316,7 +318,9 @@ function delLog(id){let l=S.logs.find(x=>x.id===id); if(!l){toast('السجل غ
 function clearFilters(){['sQuick','f_from','f_to','r_from','r_to','rQuick'].forEach(id=>{let e=document.getElementById(id); if(e)e.value='';}); document.getElementById('rep_truck').value=''; document.getElementById('rep_truck_lbl').textContent='كل القواطر'; render();}
 /* FIXED reportLogs: NO fallback. If filter gives 0, show 0 - never show another truck's records. */
 function reportLogs(){let rt=document.getElementById('rep_truck').value, rf=document.getElementById('r_from').value, rt2=document.getElementById('r_to').value, q=(document.getElementById('rQuick')?.value||'').trim(); let list=S.logs.filter(l=>{let hay=[l.truck||'',l.repair||'',l.parts||'',l.inv||'',String(l.cost||''),l.date||'',l.odo||''].join(' '); return (!rt||truckMatch(l.truck,rt))&&(!rf||l.date>=rf)&&(!rt2||l.date<=rt2)&&(!q||hay.includes(q));}); return {list,fallback:false};}
-function reportHTML(){let {list}=reportLogs(); let total=list.reduce((a,l)=>a+(+l.cost||0),0); let per={}; list.forEach(l=>{let k=S.trucks.find(t=>truckMatch(l.truck,t.name))?.name||l.truck; per[k]=per[k]||{n:0,c:0}; per[k].n++; per[k].c+=+l.cost||0;}); let rows=list.map((l,i)=>'<tr><td>'+(i+1)+'</td><td class="date">'+l.date+'</td><td>'+l.truck+'</td><td>'+l.repair+'</td><td>'+l.parts+'</td><td>'+(l.oil?'نعم':'لا')+'</td><td>'+(l.grease?'نعم':'لا')+'</td><td>'+(l.air?'نعم':'لا')+'</td><td>'+(l.odo||'-')+'</td><td>'+((+l.cost||0).toLocaleString())+'</td><td>'+(l.inv||'-')+'</td></tr>').join('')||'<tr><td colspan="11">لا توجد سجلات لهذا الفلتر — هذه القاطرة ليس لها سجلات</td></tr>'; let perRows=Object.entries(per).map(([k,v])=>'<tr><td>'+k+'</td><td>'+v.n+'</td><td>'+v.c.toLocaleString()+'</td></tr>').join('')||'<tr><td colspan="3">لا توجد سجلات</td></tr>'; return {html:'<div class="doc">'+((S.settings&&S.settings.showFactory===false)?'':'<h2>'+((S.settings&&S.settings.factory)||'مصنع اسمنت الحديدة')+'</h2>')+'<h3>تقرير صيانة القواطر وقطع الغيار</h3><p>تاريخ التقرير: '+new Date().toISOString().slice(0,10)+' | القاطرة: '+(document.getElementById('rep_truck').value||'الكل')+'</p>'+(list.length===0?'<p style="background:#fee2e2;padding:10px;border-radius:10px">⛔ لا توجد سجلات مطابقة لهذا الفلتر. القاطرة المختارة ليس لها سجلات صيانة.</p>':'')+'<p>إجمالي السجلات: '+S.logs.length+' | بعد الفلتر: '+list.length+' | إجمالي التكلفة: '+total.toLocaleString()+'</p><div class="report-hint">↔️ ضع إصبعك على الجدول واسحب يمين ويسار لعرض كل الأعمدة</div><div class="scroll-table-wrap"><table><tr><th>م</th><th>التاريخ</th><th>القاطرة</th><th>نوع الصيانة</th><th>القطع</th><th>زيت</th><th>تشحيم</th><th>هواية</th><th>العداد</th><th>التكلفة</th><th>الفاتورة</th></tr>'+rows+'<tr><td colspan="9"><b>الإجمالي</b></td><td colspan="2"><b>'+total.toLocaleString()+'</b></td></tr></table></div>'+((S.settings&&S.settings.showSummary===false)?'':'<h3>ملخص التكاليف حسب القاطرة</h3><div class="scroll-table-wrap"><table><tr><th>القاطرة</th><th>عدد السجلات</th><th>إجمالي التكلفة</th></tr>'+perRows+'</table></div>')+'<div style="border-top:2px solid #0f2447;margin-top:18px;padding-top:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px"><div><b>مسؤول القواطر: '+(S.settings?.manager||'غير محدد - يحدد من الإعدادات')+'</b><br>📞 التلفون: '+(S.settings?.managerPhone||'—')+'</div><div style="text-align:left"><b>التوقيع:</b><br><br>............................</div></div><p>تم إعداد التقرير من نظام صيانة قواطر النقل — '+(S.settings?.manager||'غير محدد - يحدد من الإعدادات')+' | '+(S.settings?.managerPhone||'—')+'</p></div>',count:list.length,total};}
+function reportHTML(){let {list}=reportLogs(); let total=list.reduce((a,l)=>a+(+l.cost||0),0); let per={}; list.forEach(l=>{let k=S.trucks.find(t=>truckMatch(l.truck,t.name))?.name||l.truck; per[k]=per[k]||{n:0,c:0}; per[k].n++; per[k].c+=+l.cost||0;}); let rowArr=list.map((l,i)=>'<tr><td>'+(i+1)+'</td><td class="date">'+l.date+'</td><td>'+l.truck+'</td><td>'+l.repair+'</td><td>'+l.parts+'</td><td>'+(l.oil?'نعم':'لا')+'</td><td>'+(l.grease?'نعم':'لا')+'</td><td>'+(l.air?'نعم':'لا')+'</td><td>'+(l.odo||'-')+'</td><td>'+((+l.cost||0).toLocaleString())+'</td><td>'+(l.inv||'-')+'</td></tr>');
+let _head='<thead><tr><th>م</th><th>التاريخ</th><th>القاطرة</th><th>نوع الصيانة</th><th>القطع</th><th>زيت</th><th>تشحيم</th><th>هواية</th><th>العداد</th><th>التكلفة</th><th>الفاتورة</th></tr></thead>';
+let rows=''; if(rowArr.length===0){rows='<div class="scroll-table-wrap"><table>'+_head+'<tr><td colspan="11">لا توجد سجلات لهذا الفلتر — هذه القاطرة ليس لها سجلات</td></tr></table></div>';} else {let _chunks=[]; let _rest=rowArr.slice(); let _first=true; while(_rest.length){let _n=_first?14:18; _chunks.push(_rest.splice(0,_n)); _first=false;} rows=_chunks.map((c,ci)=>'<div class="scroll-table-wrap report-chunk"><table>'+_head+'<tbody>'+c.join('')+(ci===_chunks.length-1?'<tr><td colspan="9"><b>الإجمالي</b></td><td colspan="2"><b>'+total.toLocaleString()+'</b></td></tr>':'')+'</tbody></table></div>').join('');} let perRows=Object.entries(per).map(([k,v])=>'<tr><td>'+k+'</td><td>'+v.n+'</td><td>'+v.c.toLocaleString()+'</td></tr>').join('')||'<tr><td colspan="3">لا توجد سجلات</td></tr>'; return {html:'<div class="doc">'+((S.settings&&S.settings.showFactory===false)?'':'<h2>'+((S.settings&&S.settings.factory)||'مصنع اسمنت الحديدة')+'</h2>')+'<h3>تقرير صيانة القواطر وقطع الغيار</h3><p>تاريخ التقرير: '+new Date().toISOString().slice(0,10)+' | القاطرة: '+(document.getElementById('rep_truck').value||'الكل')+'</p>'+(list.length===0?'<p style="background:#fee2e2;padding:10px;border-radius:10px">⛔ لا توجد سجلات مطابقة لهذا الفلتر. القاطرة المختارة ليس لها سجلات صيانة.</p>':'')+'<p>إجمالي السجلات: '+S.logs.length+' | بعد الفلتر: '+list.length+' | إجمالي التكلفة: '+total.toLocaleString()+'</p><div class="report-hint">↔️ ضع إصبعك على الجدول واسحب يمين ويسار لعرض كل الأعمدة</div>'+rows+''+((S.settings&&S.settings.showSummary===false)?'':'<h3>ملخص التكاليف حسب القاطرة</h3><div class="scroll-table-wrap"><table><thead><tr><th>القاطرة</th><th>عدد السجلات</th><th>إجمالي التكلفة</th></tr></thead><tbody>'+perRows+'</tbody></table></div>')+'<div style="border-top:2px solid #0f2447;margin-top:18px;padding-top:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px"><div><b>مسؤول القواطر: '+(S.settings?.manager||'غير محدد - يحدد من الإعدادات')+'</b><br>📞 التلفون: '+(S.settings?.managerPhone||'—')+'</div><div style="text-align:left"><b>التوقيع:</b><br><br>............................</div></div><p>تم إعداد التقرير من نظام صيانة قواطر النقل — '+(S.settings?.manager||'غير محدد - يحدد من الإعدادات')+' | '+(S.settings?.managerPhone||'—')+'</p></div>',count:list.length,total};}
 function closeReportPage(){document.getElementById('reportPage').classList.remove('open');}
 function showReportPage(html){document.getElementById('reportPageContent').innerHTML=html; document.getElementById('reportPage').classList.add('open'); window.scrollTo(0,0);}
 function showReport(){let r=reportHTML(); S.reports.push({at:new Date().toLocaleString('ar'),count:r.count,html:r.html}); saveLocal(); showReportPage(r.html); toast('تم فتح التقرير في صفحة كاملة ✓ وحفظه في المكتبة'); render();}
@@ -351,7 +355,106 @@ function openContact(){document.getElementById('contactModal').classList.add('op
 /* ===== Language ===== */
 const LANG_AR={home:'الرئيسية',trucks:'القواطر',maint:'الصيانة',reports:'التقارير',settings:'الإعدادات',backup:'النسخ الاحتياطي'};
 const LANG_EN={home:'Home',trucks:'Trucks',maint:'Maintenance',reports:'Reports',settings:'Settings',backup:'Backup'};
-function applyLang(){let lang=(S.settings&&S.settings.lang)||'ar';document.documentElement.lang=lang;document.documentElement.dir=(lang==='en'?'ltr':'rtl');let dict=lang==='en'?LANG_EN:LANG_AR;document.querySelectorAll('nav button').forEach(b=>{let t=b.textContent.trim();let key=Object.keys(LANG_AR).find(k=>LANG_AR[k]===t)||Object.keys(LANG_EN).find(k=>LANG_EN[k]===t);if(key){let emoji=t.replace(/[\u0600-\u06FFa-zA-Z ]/g,'').trim();b.textContent=(emoji?emoji+' ':'')+dict[key];}});let h1=document.querySelector('header h1');if(h1)h1.textContent=(lang==='en'?'🚛 Truck Fleet Maintenance System':'🚛 نظام صيانة قواطر النقل');}
+
+/* ===== Full UI translation (Arabic <-> English) ===== */
+const TR_AR_EN = {
+'نظام صيانة قواطر النقل':'Truck Fleet Maintenance System',
+'إدارة الأسطول • الصيانة • التنبيهات':'Fleet Management • Maintenance • Alerts',
+'الرئيسية':'Home','القواطر':'Trucks','الصيانة':'Maintenance','التقارير':'Reports','الإعدادات':'Settings','النسخ الاحتياطي':'Backup',
+'قاطرة':'Truck','سجل صيانة':'Maintenance record','تغيير زيت':'Oil change','إجمالي التكلفة':'Total cost',
+'بحث سريع':'Quick search','تنبيهات الزيت (كل 4000 كم)':'Oil alerts (every 4000 km)','آخر سجل محفوظ':'Last saved record',
+'إضافة قاطرة جديدة':'Add New Truck','إضافة قاطرة':'Add Truck','إضافة سجل صيانة':'Add Maintenance Record',
+'فلاتر التقرير':'Report Filters','عرض التقرير':'Show Report','عرض الكل':'Show All','مسح الفلاتر':'Clear Filters',
+'حفظ القاطرة':'Save Truck','حفظ سجل الصيانة':'Save Maintenance Record','إلغاء':'Cancel','إغلاق':'Close','حفظ':'Save',
+'التنبيهات':'Alerts','حول التطبيق':'About App','تواصل معنا':'Contact Us',
+'الخصوصية والحماية':'Privacy & Protection','المظهر والثيمات':'Appearance & Themes',
+'المصنع والمسؤول':'Factory & Manager','لغة التطبيق':'App Language','التحكم':'Controls',
+'حفظ الإعدادات':'Save Settings','مسؤول القواطر':'Fleet Manager',
+'تلفون مسؤول القواطر':'Fleet Manager Phone','اسم المصنع / الشركة':'Factory / Company Name',
+'إظهار اسم المصنع / الشركة في الشاشة الرئيسية والتقرير':'Show factory name on home screen and report',
+'اللغة':'Language','العربية':'Arabic',
+'السماح بتعديل وحذف القاطرة — أغلقه لقفل التعديل والحذف':'Allow editing and deleting trucks — turn off to lock editing',
+'إظهار جدول ملخص التكلفة في التقرير — أغلقه لإخفائه':'Show cost summary table in report — turn off to hide it',
+'قفل التطبيق — رقم سري أو نمط نقش':'App lock — PIN or pattern',
+'مسافات الزيت والتشحيم والهواية + الصوت':'Oil, greasing and air-filter distances + sound',
+'غيّر ألوان التطبيق — 6 ثيمات جميلة':'Change app colors — 6 beautiful themes',
+'واتساب واتصال — الجرب 784693794':'WhatsApp and calls — Aljarb 784693794',
+'النسخة والمطور':'Version and developer',
+'تفعيل قفل التطبيق':'Enable app lock','نوع القفل':'Lock type',
+'رقم سري (PIN)':'PIN code','نمط نقش — ارسم بالاصبع':'Pattern — draw with your finger',
+'الرقم السري — 4 أرقام على الأقل':'PIN — at least 4 digits',
+'ارسم نمطك الجديد بالاصبع':'Draw your new pattern with your finger',
+'مسح النمط':'Clear pattern','حفظ الخصوصية':'Save Privacy','إلغاء القفل':'Remove Lock',
+'تفعيل التنبيهات':'Enable alerts','تشغيل صوت التنبيهات':'Alert sound',
+'مسافة تغيير الزيت (كم)':'Oil change distance (km)',
+'مسافة التشحيم (كم) — تنبيه التشحيم':'Greasing distance (km) — greasing alert',
+'مسافة تنظيف الهواية (كم) — تنبيه الهواية':'Air-filter cleaning distance (km) — air-filter alert',
+'حفظ التنبيهات':'Save Alerts',
+'اختر الثيم — يتغير رأس التطبيق وألوانه فورا.':'Choose a theme — the app header and colors change instantly.',
+'أزرق ملكي':'Royal Blue','أخضر زمردي':'Emerald Green','تركوازي':'Turquoise','بنفسجي':'Purple','برتقالي':'Orange','ليلي داكن':'Dark Night',
+'الثيم الافتراضي':'Default theme','هادئ وأنيق':'Calm and elegant','بحري منعش':'Fresh marine',
+'فخم وعصري':'Luxurious and modern','دافئ وحيوي':'Warm and lively','مريح للعين ليلا':'Easy on the eyes at night',
+'قفل التطبيق — لا يفتح إلا بالرمز الذي تختاره.':'App lock — opens only with the code you choose.',
+'تاريخ الفحص':'Inspection date','تاريخ التأمين':'Insurance date',
+'اختر تاريخ الفحص:':'Choose inspection date:','اختر تاريخ التأمين:':'Choose insurance date:','بدون تاريخ':'No date',
+'القاطرة:':'Truck:','التاريخ':'Date','العداد':'Odometer','نوع الصيانة':'Maintenance type','القطع المستبدلة':'Replaced parts',
+'التكلفة':'Cost','الفاتورة':'Invoice','ملاحظات':'Notes',
+'تم تغيير الزيت في هذه الصيانة':'Oil changed in this maintenance',
+'تم التشحيم في هذه الصيانة':'Greasing done in this maintenance',
+'تم تنظيف الهواية في هذه الصيانة':'Air filter cleaned in this maintenance',
+'اضغط هنا لاختيار القاطرة':'Tap here to choose the truck',
+'— اختر القاطرة —':'— Choose the truck —',
+'تعديل سجل صيانة':'Edit maintenance record','تعديل القاطرة':'Edit truck',
+'تعديل':'Edit','حذف':'Delete','النسخة:':'Version:',
+'لأي استفسار أو دعم فني أو طلب تعديل:':'For any inquiry, technical support or change request:',
+'تطبيق لإدارة صيانة أسطول القواطر — تسجيل الصيانة، تتبع الزيت والتشحيم وتنظيف الهواية، التنبيهات، والتقارير والطباعة والتصدير PDF — يعمل بدون إنترنت.':'An app to manage truck fleet maintenance — record maintenance, track oil, greasing and air-filter cleaning, alerts, reports, printing and PDF export — works offline.',
+'تطوير:':'Developed by:','إغلاق القائمة':'Close menu','إغلاق القفل':'Close',
+'أدخل الرمز لفتح التطبيق':'Enter the code to open the app',
+'ارسم النمط لفتح التطبيق':'Draw the pattern to open the app',
+'ارسم نمطك بالاصبع':'Draw your pattern with your finger',
+'نسيت الرمز؟':'Forgot the code?','مسح':'Clear','فتح بالنمط':'Open with pattern',
+'القاطرة:':'Truck:','السائق:':'Driver:','لوحة:':'Plate:','من:':'From:','إلى:':'To:',
+'الكل':'All','الاسم':'Name','التلفون':'Phone','اللوحة':'Plate','الموديل':'Model','السائق':'Driver',
+'الطباعة':'Print','تصدير':'Export','نسخ التقرير':'Copy report','التقرير':'Report'
+};
+const TR_EN_AR = {}; Object.keys(TR_AR_EN).forEach(k=>{TR_EN_AR[TR_AR_EN[k]]=k;});
+const TR_PH_AR_EN = {
+'اسم القاطرة *':'Truck name *','اللوحة':'Plate number','الموديل':'Model','السائق':'Driver','ملاحظات':'Notes',
+'اكتب اسم مسؤول القواطر هنا':'Type fleet manager name here',
+'تلفون مسؤول القواطر':'Fleet manager phone',
+'مثال: مصنع اسمنت الحديدة أو أي شركة':'Example: Al-Hodeidah Cement Factory or any company',
+'مثال: 2000':'Example: 2000','مثال: 1000':'Example: 1000','مثال: 1234':'Example: 1234','مثال: 12369':'Example: 12369',
+'ابحث باسم القاطرة أو الصيانة أو القطع...':'Search by truck, maintenance or parts...',
+'🔍 بحث سريع... اسم القاطرة أو الصيانة أو القطع أو الفاتورة أو التكلفة':'🔍 Quick search... truck, maintenance, parts, invoice or cost',
+'🔍 بحث سريع... اسم القاطرة أو الصيانة أو القطع أو التكلفة أو الفاتورة':'🔍 Quick search... truck, maintenance, parts, cost or invoice'
+};
+const TR_PH_EN_AR = {}; Object.keys(TR_PH_AR_EN).forEach(k=>{TR_PH_EN_AR[TR_PH_AR_EN[k]]=k;});
+function translatePage(lang){
+  let dict = lang==='en' ? TR_AR_EN : TR_EN_AR;
+  let keys = Object.keys(dict).sort((a,b)=>b.length-a.length);
+  let walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  let nodes=[]; let n; while(n=walker.nextNode()) nodes.push(n);
+  nodes.forEach(tn=>{
+    let v = tn.nodeValue; if(!v || !v.trim()) return;
+    // Skip script/style and dynamic data containers that hold user data (truck names, logs)
+    let p = tn.parentElement; if(!p) return;
+    let tag = p.tagName; if(tag==='SCRIPT'||tag==='STYLE'||tag==='OPTION') return;
+    if(p.closest && (p.closest('#truckList')||p.closest('#logList')||p.closest('#homeTrucks')||p.closest('#reportPageContent')||p.closest('#lastLog'))) return;
+    let trimmed = v.trim();
+    // Match the text core, ignoring a leading emoji (e.g. "💾 حفظ الإعدادات")
+    let core = trimmed.replace(/^[^\u0600-\u06FFA-Za-z0-9]+/, '').trim();
+    for(let k of keys){ if(core===k){ tn.nodeValue = v.replace(k, dict[k]); return; } }
+  });
+  // Placeholders (inputs / textareas) - exact match only
+  let phDict = lang==='en' ? TR_PH_AR_EN : TR_PH_EN_AR;
+  document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(el=>{
+    let ph = el.getAttribute('placeholder'); if(ph && phDict[ph]) el.setAttribute('placeholder', phDict[ph]);
+  });
+  // Select options: exact match
+  document.querySelectorAll('option').forEach(o=>{ let t=o.textContent.trim(); if(dict[t]) o.textContent = o.textContent.replace(t, dict[t]); });
+}
+
+function applyLang(){let lang=(S.settings&&S.settings.lang)||'ar';document.documentElement.lang=lang;document.documentElement.dir=(lang==='en'?'ltr':'rtl');let dict=lang==='en'?LANG_EN:LANG_AR;document.querySelectorAll('nav button').forEach(b=>{let t=b.textContent.trim();let key=Object.keys(LANG_AR).find(k=>LANG_AR[k]===t)||Object.keys(LANG_EN).find(k=>LANG_EN[k]===t);if(key){let emoji=t.replace(/[\u0600-\u06FFa-zA-Z ]/g,'').trim();b.textContent=(emoji?emoji+' ':'')+dict[key];}});let h1=document.querySelector('header h1');if(h1)h1.textContent=(lang==='en'?'🚛 Truck Fleet Maintenance System':'🚛 نظام صيانة قواطر النقل'); translatePage(lang);}
 /* ===== App Lock ===== */
 let _pinInput='',_lockTries=0,_patternInput='';
 function saveLockFromSettings(){let _pt=document.getElementById('set_lockCodePattern'); let code=((document.getElementById('set_lockType').value==='pattern'&&_pt&&_pt.value)?_pt.value:(document.getElementById('set_lockCode').value||'')).trim();let type=document.getElementById('set_lockType').value;let on=document.getElementById('set_lockOn').checked;if(on&&code.length<4){toast('الرمز لازم 4 أرقام على الأقل',1);return;}if(!S.settings)S.settings={};S.settings.lockOn=on;S.settings.lockType=type;if(code)S.settings.lockCode=code;if(on&&!S.settings.lockCode){toast('اكتب الرمز أولا',1);return;}saveLocal();toast(on?'🔒 تم تفعيل قفل التطبيق ✓':'تم حفظ إعدادات القفل ✓');}
@@ -392,6 +495,7 @@ function setTheme(t){if(!S.settings) S.settings={}; S.settings.theme=t; applyThe
 /* Open WhatsApp / Phone outside the app (not as a link inside it) */
 function openExternal(url){try{if(window.Android&&Android.openExternal){Android.openExternal(url);return;}}catch(e){} window.location.href=url;}
 
+const _origRender2 = render; render = function(){ _origRender2(); translatePage((S.settings&&S.settings.lang)||'ar'); };
 load(); migrateOwner(); render(); applyLang(); applyTheme(); checkLockOnStart();
 
 function migrateOwner(){try{if(!S.settings) S.settings={}; S.settings.owner='الجرب للأنظمة والبرمجيات'; S.settings.ownerPhone='784693794'; if(S.settings.manager==='الجرب'&&!S.settings._managerFixed){S.settings.manager=''; S.settings._managerFixed=1;} if(S.settings.phone&&!S.settings.managerPhone){S.settings.managerPhone=S.settings.phone;} delete S.settings.phone; saveLocal();}catch(e){}}
