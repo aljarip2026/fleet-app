@@ -37,6 +37,11 @@ main{padding:14px;padding-bottom:92px}
 .card{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 4px 14px rgba(15,23,42,.05)}
 .row{display:flex;gap:8px;flex-wrap:wrap}
 .stat{flex:1;min-width:105px;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px 8px;text-align:center}
+.date-row{flex-wrap:nowrap !important;gap:6px !important}
+.date-row .ghost{flex:1 !important;padding:6px 4px !important;font-size:11px !important;white-space:nowrap !important;min-width:0 !important}
+.stat.wide{flex-basis:100%;min-width:100%}
+.stat.wide b{font-size:28px;word-break:break-all;overflow-wrap:break-word;line-height:1.1}
+.stat b{overflow-wrap:break-word;word-break:break-all}
 .stat b{font-size:22px;display:block;color:#0f2447}.stat span{font-size:12px;color:#64748b}
 input,textarea{width:100%;background:#f8fafc;color:#0f172a;border:1.5px solid #e2e8f0;border-radius:13px;padding:12px;margin:6px 0;font-size:15px;outline:none}
 input:focus,textarea:focus{border-color:#f59e0b;background:#fff}
@@ -97,7 +102,7 @@ button.red{background:#fee2e2;color:#991b1b}button.green{background:#dcfce7;colo
 <div id="msg"></div><main>
 <section data-tab="home">
 
-<div class="row"><div class="stat"><b id="cTrucks">0</b><span>قاطرة</span></div><div class="stat"><b id="cLogs">0</b><span>سجل صيانة</span></div><div class="stat"><b id="cCost">0</b><span>إجمالي التكلفة</span></div><div class="stat"><b id="cOil">0</b><span>تغيير زيت</span></div></div>
+<div class="row"><div class="stat"><b id="cTrucks">0</b><span>قاطرة</span></div><div class="stat"><b id="cLogs">0</b><span>سجل صيانة</span></div><div class="stat"><b id="cOil">0</b><span>تغيير زيت</span></div></div><div class="row"><div class="stat wide"><b id="cCost">0</b><span>إجمالي التكلفة</span></div></div>
 <div class="card"><b>🔍 بحث سريع</b><input id="qHome" placeholder="ابحث باسم القاطرة أو الصيانة أو القطع..."></div>
 <div class="card"><b>⚠️ تنبيهات الزيت (كل 4000 كم)</b><div id="alerts"></div></div>
 <div class="card"><b>آخر سجل محفوظ</b><div id="lastLog">—</div></div>
@@ -118,7 +123,7 @@ button.red{background:#fee2e2;color:#991b1b}button.green{background:#dcfce7;colo
 <button class="btn" onclick="saveLog()">💾 حفظ سجل الصيانة</button><button class="ghost" onclick="hideLogForm()">إلغاء</button></div><div id="logList"></div></section>
 <section data-tab="reports" class="hidden">
 <div class="card"><b>فلاتر التقرير</b><button class="btn" style="background:#fde68a" onclick="openTruckPicker('rep_truck')">🚌 القاطرة: <span id="rep_truck_lbl">كل القواطر</span></button><input type="hidden" id="rep_truck">
-<div class="row"><button class="ghost" onclick="pickDate('r_from')">📅 من: <span id="r_from_lbl">الكل</span></button><button class="ghost" onclick="pickDate('r_to')">📅 إلى: <span id="r_to_lbl">الكل</span></button><button class="ghost" onclick="clearFilters();render()">🔄 عرض الكل</button></div><input type="hidden" id="r_from"><input type="hidden" id="r_to">
+<div class="row date-row"><button class="ghost" onclick="pickDate('r_from')">📅 من: <span id="r_from_lbl">الكل</span></button><button class="ghost" onclick="pickDate('r_to')">📅 إلى: <span id="r_to_lbl">الكل</span></button><button class="ghost" onclick="clearFilters();render()">🔄 عرض الكل</button></div><input type="hidden" id="r_from"><input type="hidden" id="r_to">
 <input id="rQuick" placeholder="🔍 بحث سريع... اسم القاطرة أو الصيانة أو القطع أو التكلفة أو الفاتورة">
 <div class="report-actions"><button class="btn full" onclick="showReport()">📋 عرض التقرير</button></div></div>
 <div class="card" style="text-align:center;color:#475569;font-size:13px">📋 التقرير ما يظهر هنا — اضغط <b>عرض التقرير</b> فوق، بيفتح لك التقرير في صفحة كاملة.</div><div id="reportDiag" class="card hidden"></div><div id="reportTables" class="hidden"></div><div id="reportLib"></div></section>
