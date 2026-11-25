@@ -49,7 +49,27 @@ public class MainActivity extends Activity {
         // Bridge: real Android print + real file download to Downloads folder
         webView.addJavascriptInterface(new AndroidBridge(), "Android");
 
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url == null) return false;
+                String u = url.toLowerCase();
+                // Phone / WhatsApp / SMS / Email must open in the phone's own apps, NOT as a link inside WebView
+                if (u.startsWith("tel:") || u.startsWith("sms:") || u.startsWith("mailto:")
+                        || u.startsWith("whatsapp:") || u.contains("wa.me") || u.contains("api.whatsapp.com")
+                        || u.startsWith("intent:")) {
+                    try {
+                        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    } catch (Exception e) {
+                        Toast.makeText(MainActivity.this, "تعذر فتح التطبيق", Toast.LENGTH_SHORT).show();
+                    }
+                    return true; // handled outside WebView
+                }
+                return false; // normal pages stay inside the app
+            }
+        });
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> callback,
@@ -82,6 +102,19 @@ public class MainActivity extends Activity {
     }
 
     public class AndroidBridge {
+        @JavascriptInterface
+        public void openExternal(String url) {
+            runOnUiThread(() -> {
+                try {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, "تعذر فتح التطبيق", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
         @JavascriptInterface
         public void printLandscape() {
             runOnUiThread(() -> {
