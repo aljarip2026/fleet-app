@@ -75,21 +75,24 @@ button.red{background:#fee2e2;color:#991b1b}button.green{background:#dcfce7;colo
 .editing{border:2px solid #f59e0b !important;box-shadow:0 0 0 4px rgba(245,158,11,.25)}
 
 @media print{
-  @page{size:A4 landscape;margin:8mm}
+  @page{size:A4 landscape;margin:6mm}
   body *{visibility:hidden}
   #reportPage, #reportPage *{visibility:visible}
   #reportPage{position:static;left:0;top:0;width:100%;background:#fff;height:auto;overflow:visible}
   #reportPage .page{overflow:visible !important;height:auto !important}
   #reportPageContent table{page-break-inside:auto !important}
-  #reportPageContent tr{page-break-inside:avoid !important;page-break-after:auto !important}
+  #reportPageContent tr{page-break-inside:auto !important;page-break-after:auto !important}
   #reportPageContent thead{display:table-header-group !important}
   #reportPageContent .scroll-table-wrap{overflow:visible !important;max-height:none !important}
-  #reportPage .box{box-shadow:none;max-width:100%;margin:0;padding:0}
+  #reportPage .box{box-shadow:none;max-width:100%;margin:0;padding:0;min-height:0 !important}
+  #reportPage .page{margin:0 !important;padding:0 !important;min-height:0 !important}
+  #reportPageContent .doc{margin:0 !important}
+  #reportPageContent h2{margin:0 0 4px 0 !important} #reportPageContent h3{margin:0 0 4px 0 !important} #reportPageContent p{margin:0 0 6px 0 !important}
   #reportPage button{display:none !important}
   nav, header, main{display:none !important}
   #reportPageContent{width:100% !important;overflow:visible !important}
   #reportPageContent table{width:100% !important;min-width:0 !important;max-width:100% !important;table-layout:fixed !important;border-collapse:collapse}
-  #reportPageContent th, #reportPageContent td{font-size:11px !important;line-height:1.45 !important;padding:4px 3px !important;word-break:break-word !important;overflow-wrap:break-word !important;white-space:normal !important;border:1px solid #333}
+  #reportPageContent th, #reportPageContent td{font-size:11px !important;line-height:1.35 !important;padding:3px 2px !important;word-break:break-word !important;overflow-wrap:break-word !important;white-space:normal !important;border:1px solid #333}
   #reportPageContent .scroll-table-wrap table{width:100% !important;min-width:0 !important}
   #reportPageContent .doc{width:100% !important;max-width:100% !important;padding:0 !important}
   #reportPageContent h2{font-size:14px !important} #reportPageContent h3{font-size:11px !important} #reportPageContent p{font-size:9px !important}
@@ -125,7 +128,7 @@ button.red{background:#fee2e2;color:#991b1b}button.green{background:#dcfce7;colo
 .shake{animation:shake .3s}
 
 </style></head><body>
-<header><button onclick="openDrawer()" title="القائمة" style="width:46px;height:46px;min-width:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:24px;line-height:1">☰</button><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div><h1>🚛 نظام صيانة قواطر النقل</h1><div id="factoryTitle" style="font-size:22px;font-weight:900;line-height:1.15">مصنع اسمنت الحديدة</div><small>إدارة الأسطول • الصيانة • التنبيهات</small><br><small id="ownerLine" style="color:#fde68a;font-weight:800;font-size:14px">الجرب للأنظمة والبرمجيات | 📞 784693794</small></div><div style="display:flex;gap:8px;flex-shrink:0"><button onclick="tab('backup')" title="النسخ" style="width:46px;height:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px">🗄️</button><button onclick="openSettings()" title="الإعدادات" style="width:46px;height:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px">⚙️</button><button onclick="openAlerts()" title="التنبيهات" style="position:relative;width:46px;height:46px;border-radius:14px;border:0;background:#f59e0b;color:#111;font-size:22px">🔔<span id="bellBadge" style="position:absolute;top:-6px;left:-4px;background:#ef4444;color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px">0</span></button></div></div><br><span id="lastSave" class="pill">آخر حفظ: —</span></header>
+<header><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div><h1>🚛 نظام صيانة قواطر النقل</h1><div id="factoryTitle" style="font-size:22px;font-weight:900;line-height:1.15">مصنع اسمنت الحديدة</div><small>إدارة الأسطول • الصيانة • التنبيهات</small><br><small id="ownerLine" style="color:#fde68a;font-weight:800;font-size:14px">الجرب للأنظمة والبرمجيات | 📞 784693794</small></div><div style="display:flex;gap:8px;flex-shrink:0"><button onclick="tab('backup')" title="النسخ" style="width:46px;height:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px">🗄️</button><button onclick="openSettings()" title="الإعدادات" style="width:46px;height:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px">⚙️</button><button onclick="openAlerts()" title="التنبيهات" style="position:relative;width:46px;height:46px;border-radius:14px;border:0;background:#f59e0b;color:#111;font-size:22px">🔔<span id="bellBadge" style="position:absolute;top:-6px;left:-4px;background:#ef4444;color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px">0</span></button></div></div><br><span id="lastSave" class="pill">آخر حفظ: —</span></header>
 <div id="msg"></div><main>
 <section data-tab="home">
 
@@ -279,7 +282,7 @@ function delBackup(i){S.backups.splice(i,1); saveLocal(); render();}
 function copyText(t){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(()=>toast('تم النسخ ✓')).catch(()=>toast('انسخ النص يدويا'));} else toast('انسخ النص يدويا');}
 function openSettings(){let s=S.settings||{}; let f=document.getElementById('set_factory'); if(f) f.value=s.factory||'مصنع اسمنت الحديدة'; let sf=document.getElementById('set_showFactory'); if(sf) sf.checked=s.showFactory!==false; let ae=document.getElementById('set_allowEdit'); if(ae) ae.checked=s.allowEdit!==false; let ss=document.getElementById('set_showSummary'); if(ss) ss.checked=s.showSummary!==false; let gr=document.getElementById('set_grease'); if(gr) gr.value=s.grease||2000; let ai=document.getElementById('set_air'); if(ai) ai.value=s.air||1000; let al=document.getElementById('set_alerts'); if(al) al.checked=s.alerts!==false; let so=document.getElementById('set_sound'); if(so) so.checked=s.sound!==false; let lk=document.getElementById('set_lockOn'); if(lk) lk.checked=!!s.lockOn; let lt=document.getElementById('set_lockType'); if(lt) lt.value=s.lockType||'pin'; let lc=document.getElementById('set_lockCode'); if(lc) lc.value=''; let lg=document.getElementById('set_lang'); if(lg) lg.value=s.lang||'ar'; document.getElementById('settingsModal').classList.add('open');}
 function playAlertSound(){try{if(S.settings&&S.settings.sound===false) return; let C=window.AudioContext||window.webkitAudioContext; if(!C) return; let ctx=new C(); let o=ctx.createOscillator(), g=ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value=880; o.type='sine'; g.gain.value=0.12; o.start(); o.stop(ctx.currentTime+0.25); setTimeout(()=>{let o2=ctx.createOscillator(), g2=ctx.createGain(); o2.connect(g2); g2.connect(ctx.destination); o2.frequency.value=880; o2.type='sine'; g2.gain.value=0.12; o2.start(); o2.stop(ctx.currentTime+0.25);},300);}catch(e){}}
-function saveSettings(){S.settings={factory:document.getElementById('set_factory').value||'مصنع اسمنت الحديدة',showFactory:document.getElementById('set_showFactory').checked,allowEdit:document.getElementById('set_allowEdit').checked,showSummary:document.getElementById('set_showSummary').checked,alerts:document.getElementById('set_alerts').checked,sound:document.getElementById('set_sound').checked,oil:+document.getElementById('set_oil').value||4000,grease:+document.getElementById('set_grease').value||2000,air:+document.getElementById('set_air').value||1000,lang:document.getElementById('set_lang').value||'ar',manager:(document.getElementById('set_manager').value||'').trim(),managerPhone:(document.getElementById('set_phone').value||'').trim(),owner:'الجرب للأنظمة والبرمجيات',ownerPhone:'784693794'}; saveLocal(); toast('تم حفظ الإعدادات ✓'); closeModal('settingsModal'); render(); applyLang();}
+function saveSettings(){let _oldLock=S.settings||{}; S.settings={lockOn:!!_oldLock.lockOn,lockType:_oldLock.lockType||'pin',lockCode:_oldLock.lockCode||'',factory:document.getElementById('set_factory').value||'مصنع اسمنت الحديدة',showFactory:document.getElementById('set_showFactory').checked,allowEdit:document.getElementById('set_allowEdit').checked,showSummary:document.getElementById('set_showSummary').checked,alerts:document.getElementById('set_alerts').checked,sound:document.getElementById('set_sound').checked,oil:+document.getElementById('set_oil').value||4000,grease:+document.getElementById('set_grease').value||2000,air:+document.getElementById('set_air').value||1000,lang:document.getElementById('set_lang').value||'ar',manager:(document.getElementById('set_manager').value||'').trim(),managerPhone:(document.getElementById('set_phone').value||'').trim(),owner:'الجرب للأنظمة والبرمجيات',ownerPhone:'784693794'}; saveLocal(); let _lk=document.getElementById('set_lockOn'); if(_lk){S.settings.lockOn=_lk.checked; let _lt=document.getElementById('set_lockType'); if(_lt) S.settings.lockType=_lt.value; let _lc=(document.getElementById('set_lockCode').value||'').trim(); if(_lc) S.settings.lockCode=_lc;} if(S.settings.lockOn&&!S.settings.lockCode){toast('فعّلت القفل بدون رمز — اكتب الرمز أولا',1); S.settings.lockOn=false;} saveLocal(); toast('تم حفظ الإعدادات ✓'); closeModal('settingsModal'); render(); applyLang();}
 function openAlerts(){playAlertSound(); document.getElementById('alertsList').innerHTML=S.trucks.map(t=>{let used=(S.logs.filter(l=>truckMatch(l.truck,t.name)).reduce((m,l)=>Math.max(m,+l.odo||0),0))-(t.last_oil||0); let maxOdo2=S.logs.filter(l=>truckMatch(l.truck,t.name)).reduce((m,l)=>Math.max(m,+l.odo||0),0); let ug2=maxOdo2-(t.last_grease||0), ua2=maxOdo2-(t.last_air||0); let warn=(used>=(S.settings?.oil||4000)||ug2>=(S.settings?.grease||2000)||ua2>=(S.settings?.air||1000))?' ⚠️ حان وقت الصيانة':''; return '<div class="card">🔔 '+t.name+warn+'<br>زيت: '+used.toLocaleString()+' كم / '+(S.settings?.oil||4000)+'<br>تشحيم: '+ug2.toLocaleString()+' كم / '+(S.settings?.grease||2000)+'<br>هواية: '+ua2.toLocaleString()+' كم / '+(S.settings?.air||1000)+'</div>';}).join(''); document.getElementById('alertsModal').classList.add('open');}
 ['qHome','sQuick','rQuick'].forEach(id=>{let e=document.getElementById(id); if(e) e.addEventListener('input',render);});
 
@@ -308,8 +311,14 @@ function buildPatternGrid(){let g=document.getElementById('patternGrid');g.inner
 function lockPatternClear(){_patternInput='';buildPatternGrid();}
 function lockPatternTry(){if(_patternInput===(S.settings.lockCode||''))unlockApp();else lockWrong();}
 function lockWrong(){_lockTries++;let ls=document.getElementById('lockScreen');ls.classList.remove('shake');void ls.offsetWidth;ls.classList.add('shake');toast('الرمز غير صحيح',1);_pinInput='';_patternInput='';renderPinDots();buildPatternGrid();}
-function unlockApp(){document.getElementById('lockScreen').classList.remove('open');toast('أهلا بك ✓');}
-function lockForgot(){let p=prompt('لإلغاء القفل أدخل تلفون الجرب:');if(p===null)return;if(p.trim()==='784693794'){S.settings.lockOn=false;S.settings.lockCode='';saveLocal();document.getElementById('lockScreen').classList.remove('open');toast('تم إلغاء القفل ✓');}else toast('الرقم غير صحيح',1);}
+function unlockApp(){_appUnlocked=true;document.getElementById('lockScreen').classList.remove('open');toast('أهلا بك ✓');}
+function lockForgot(){let p=prompt('لإلغاء القفل أدخل تلفون الجرب:');if(p===null)return;if(p.trim()==='784693794'){S.settings.lockOn=false;S.settings.lockCode='';saveLocal();_appUnlocked=true;document.getElementById('lockScreen').classList.remove('open');toast('تم إلغاء القفل ✓');}else toast('الرقم غير صحيح',1);}
+
+
+/* Lock on return: if lock is on, ask again every time app comes back */
+let _appUnlocked=false;
+document.addEventListener('visibilitychange',()=>{if(document.hidden){_appUnlocked=false;}else if(S.settings&&S.settings.lockOn&&S.settings.lockCode&&!_appUnlocked){showLockScreen();}});
+window.addEventListener('pageshow',()=>{if(S.settings&&S.settings.lockOn&&S.settings.lockCode&&!_appUnlocked){showLockScreen();}});
 
 load(); migrateOwner(); render(); applyLang(); checkLockOnStart();
 
