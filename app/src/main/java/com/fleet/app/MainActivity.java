@@ -28,6 +28,8 @@ public class MainActivity extends Activity {
 
     private WebView webView;
     private ValueCallback<Uri[]> filePathCallback;
+    private Uri cameraPhotoUri;
+    private boolean cameraMode;
     private static final int FILE_CHOOSER_REQUEST = 1001;
     private static final int VOICE_REQUEST = 1002;
 
@@ -81,6 +83,29 @@ public class MainActivity extends Activity {
                     filePathCallback.onReceiveValue(null);
                 }
                 filePathCallback = callback;
+                cameraMode = false;
+                // Invoice photo with capture="environment": open the phone camera DIRECTLY
+                if (params.isCaptureEnabled()) {
+                    try {
+                        ContentValues values = new ContentValues();
+                        values.put(MediaStore.Images.Media.DISPLAY_NAME, "invoice_" + System.currentTimeMillis() + ".jpg");
+                        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            values.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/صيانة القواطر");
+                        }
+                        cameraPhotoUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                        Intent cam = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        cam.putExtra(MediaStore.EXTRA_OUTPUT, cameraPhotoUri);
+                        cam.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        cameraMode = true;
+                        startActivityForResult(cam, FILE_CHOOSER_REQUEST);
+                        return true;
+                    } catch (Exception e) {
+                        cameraPhotoUri = null;
+                        cameraMode = false;
+                        // fall through to the file chooser below
+                    }
+                }
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 // Support JSON backup + images (invoice photos), not images only
@@ -214,9 +239,13 @@ public class MainActivity extends Activity {
         if (requestCode == FILE_CHOOSER_REQUEST) {
             if (filePathCallback != null) {
                 Uri[] results = null;
-                if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+                if (cameraMode && resultCode == Activity.RESULT_OK && cameraPhotoUri != null) {
+                    results = new Uri[]{cameraPhotoUri};
+                } else if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
                     results = new Uri[]{data.getData()};
                 }
+                cameraMode = false;
+                cameraPhotoUri = null;
                 filePathCallback.onReceiveValue(results);
                 filePathCallback = null;
             }
