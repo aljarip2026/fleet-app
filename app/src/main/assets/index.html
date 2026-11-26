@@ -220,6 +220,68 @@ th{background:linear-gradient(135deg,#1e3a8a,#0f2447)}
 #drawer .dHead{background:linear-gradient(135deg,#0b1e3f,#1e3a8a)}
 .dItem{transition:background .15s ease}
 .dItem:active{background:#fef3c7}
+
+/* ===== تطوير 2: بطاقات أقصر وأضخم + بدون توهج + قائمة الضغط المطوّل ===== */
+.card{padding:11px 12px;margin:7px 0;border-radius:15px;border-right:4px solid #f59e0b}
+.card b{font-size:16px}
+.stat{padding:10px 8px}
+header::after,header::before{display:none!important}
+#bellBadge{animation:none!important}
+#ctxOverlay{position:fixed;inset:0;z-index:9998;display:none}
+#ctxOverlay.open{display:block}
+#ctxMenu{position:fixed;z-index:9999;background:#fff;border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.3);padding:6px;min-width:175px;display:none}
+#ctxMenu.open{display:block;animation:popIn .18s ease}
+#ctxMenu button{display:block;width:100%;text-align:right;background:#f8fafc;border:0;border-radius:10px;padding:11px 12px;margin:3px 0;font-weight:800;font-size:15px;color:#0f2447}
+#ctxMenu button:active{background:#fef3c7}
+#ctxMenu button.red{background:#fee2e2;color:#991b1b}
+.ctxHint{text-align:center;color:#64748b;font-size:12px;font-weight:700;margin:2px 0 8px}
+[data-theme="dark"] #ctxMenu,[data-theme="dark"] #ctxMenu button{background:#1e293b;color:#e2e8f0}
+[data-theme="rose"] header{background:linear-gradient(135deg,#500724,#e11d48)}
+[data-theme="sky"] header{background:linear-gradient(135deg,#0c4a6e,#0284c7)}
+
+/* ===== نقلة التصميم الثانية: بطاقات أقصر + ثيمات كاملة ===== */
+header::after{display:none!important}
+#bellBadge{animation:none!important}
+main{max-width:760px;margin:0 auto}
+.card{padding:12px 13px;margin:8px 0;border-radius:20px;background:linear-gradient(180deg,#ffffff,#f8fafc)}
+.card b{font-size:16px}
+.card small{line-height:1.5}
+[data-theme="green"] nav button.on{background:linear-gradient(135deg,#15803d,#052e16)}
+[data-theme="green"] .stat b{background:linear-gradient(135deg,#15803d,#65a30d);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="green"] section h3{border-bottom-color:#bbf7d0}
+[data-theme="teal"] nav button.on{background:linear-gradient(135deg,#0d9488,#042f2e)}
+[data-theme="teal"] .stat b{background:linear-gradient(135deg,#0d9488,#0891b2);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="teal"] section h3{border-bottom-color:#99f6e4}
+[data-theme="purple"] nav button.on{background:linear-gradient(135deg,#7c3aed,#2e1065)}
+[data-theme="purple"] .stat b{background:linear-gradient(135deg,#7c3aed,#db2777);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="purple"] section h3{border-bottom-color:#ddd6fe}
+[data-theme="orange"] nav button.on{background:linear-gradient(135deg,#ea580c,#431407)}
+[data-theme="orange"] .stat b{background:linear-gradient(135deg,#ea580c,#b45309);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="orange"] section h3{border-bottom-color:#fed7aa}
+[data-theme="pink"] header{background:linear-gradient(135deg,#4a044e,#db2777)}
+[data-theme="pink"] nav button.on{background:linear-gradient(135deg,#db2777,#4a044e)}
+[data-theme="pink"] .stat b{background:linear-gradient(135deg,#db2777,#7c3aed);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="pink"] section h3{border-bottom-color:#fbcfe8}
+[data-theme="coffee"] header{background:linear-gradient(135deg,#292524,#92400e)}
+[data-theme="coffee"] nav button.on{background:linear-gradient(135deg,#92400e,#292524)}
+[data-theme="coffee"] .stat b{background:linear-gradient(135deg,#92400e,#78350f);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="coffee"] section h3{border-bottom-color:#d6d3d1}
+[data-theme="dark"] body{background:#0f172a;color:#e2e8f0}
+[data-theme="dark"] .card{background:#1e293b;color:#e2e8f0;border-color:#334155}
+[data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{background:#0f172a;color:#e2e8f0;border-color:#334155}
+[data-theme="dark"] button.ghost{background:#334155;color:#e2e8f0;border-color:#475569}
+[data-theme="dark"] .stat{background:#1e293b;color:#e2e8f0;border-color:#334155}
+[data-theme="dark"] .modal .box{background:#1e293b;color:#e2e8f0}
+[data-theme="dark"] #drawer{background:#1e293b}
+[data-theme="dark"] #drawer .dItem{background:#1e293b;color:#e2e8f0}
+[data-theme="dark"] .dateBox{background:#0f172a;border-color:#334155}
+[data-theme="dark"] .dateBox span{color:#93c5fd}
+[data-theme="dark"] .dateBox input{color:#e2e8f0}
+[data-theme="dark"] .chip{background:#334155;color:#e2e8f0}
+[data-theme="dark"] td{color:#e2e8f0}
+[data-theme="dark"] section h3{color:#e2e8f0}
+[data-theme="dark"] #ctxMenu{background:#1e293b;border-color:#334155}
+[data-theme="dark"] #ctxMenu button{color:#e2e8f0}
 </style></head><body>
 <header><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div><h1>🚛 نظام صيانة قواطر النقل</h1><div id="factoryTitle" style="font-size:22px;font-weight:900;line-height:1.15">مصنع اسمنت الحديدة</div><small>إدارة الأسطول • الصيانة • التنبيهات</small><br><small id="ownerLine" style="color:#fde68a;font-weight:800;font-size:14px">الجرب للأنظمة والبرمجيات | 📞 784693794</small></div><div style="display:flex;gap:8px;flex-shrink:0"><button onclick="tab('backup')" title="النسخ" style="width:46px;height:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px">🗄️</button><button onclick="openSettings()" title="الإعدادات" style="width:46px;height:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px">⚙️</button><button onclick="openAlerts()" title="التنبيهات" style="position:relative;width:46px;height:46px;border-radius:14px;border:0;background:#f59e0b;color:#111;font-size:22px">🔔<span id="bellBadge" style="position:absolute;top:-6px;left:-4px;background:#ef4444;color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px">0</span></button></div></div><br><span id="lastSave" class="pill">آخر حفظ: —</span></header>
 <div id="msg"></div><main>
@@ -230,12 +292,12 @@ th{background:linear-gradient(135deg,#1e3a8a,#0f2447)}
 <div class="card"><b>⚠️ تنبيهات الزيت (كل 4000 كم)</b><div id="alerts"></div></div>
 <div class="card"><b>آخر سجل محفوظ</b><div id="lastLog">—</div></div>
 <div class="card"><b>القواطر</b><div id="homeTrucks"></div></div></section>
-<section data-tab="trucks" class="hidden"><button class="btn" data-add-truck onclick="openTruckForm()">➕ إضافة قاطرة جديدة</button>
+<section data-tab="trucks" class="hidden"><button class="btn" data-add-truck onclick="openTruckForm()">➕ إضافة قاطرة جديدة</button><div class="ctxHint">👆 اضغط مطولاً على أي بطاقة للتعديل أو الحذف</div>
 <div id="truckForm" class="card hidden"><h3 id="truckFormTitle">إضافة قاطرة</h3><input id="t_name" placeholder="اسم القاطرة *"><input id="t_plate" placeholder="اللوحة"><input id="t_model" placeholder="الموديل"><input id="t_driver" placeholder="السائق">
 <label>تاريخ الفحص</label><button class="ghost" onclick="pickDate('t_insp')">📅 اختر تاريخ الفحص: <span id="t_insp_lbl">بدون تاريخ</span></button><input type="hidden" id="t_insp">
 <label>تاريخ التأمين</label><button class="ghost" onclick="pickDate('t_ins')">📅 اختر تاريخ التأمين: <span id="t_ins_lbl">بدون تاريخ</span></button><input type="hidden" id="t_ins">
 <textarea id="t_notes" placeholder="ملاحظات"></textarea><input type="hidden" id="t_id"><button class="btn" onclick="saveTruck()">💾 حفظ القاطرة</button><button class="ghost" onclick="hideTruckForm()">إلغاء</button></div><div id="truckList"></div></section>
-<section data-tab="maint" class="hidden"><button class="btn" data-add-log onclick="openLogForm()">➕ إضافة سجل صيانة</button>
+<section data-tab="maint" class="hidden"><button class="btn" data-add-log onclick="openLogForm()">➕ إضافة سجل صيانة</button><div class="ctxHint">👆 اضغط مطولاً على أي بطاقة للتعديل أو الحذف</div>
 <input id="sQuick" placeholder="🔍 بحث سريع... اسم القاطرة أو الصيانة أو القطع أو الفاتورة أو التكلفة">
 <div class="date-row3"><div class="dateBox"><span>📅 من:</span><input type="date" id="f_from" onchange="render()"></div><div class="dateBox"><span>📅 إلى:</span><input type="date" id="f_to" onchange="render()"></div><button class="ghost dateBtn" onclick="clearFilters()">مسح الفلاتر</button></div>
 <div id="logForm" class="card hidden"><h3 id="logFormTitle">إضافة سجل صيانة</h3><b>القاطرة:</b><button class="btn" style="background:#fde68a" onclick="openTruckPicker('log_truck')">🚌 اضغط هنا لاختيار القاطرة ▼<br><span id="log_truck_lbl">— اختر القاطرة —</span></button><input type="hidden" id="log_truck">
@@ -259,7 +321,7 @@ th{background:linear-gradient(135deg,#1e3a8a,#0f2447)}
 <div class="card"><b>فلاتر التقرير</b><button class="btn" style="background:#fde68a" onclick="openTruckPicker('rep_truck')">🚌 القاطرة: <span id="rep_truck_lbl">كل القواطر</span></button><input type="hidden" id="rep_truck">
 <div class="date-row3"><div class="dateBox"><span>📅 من:</span><input type="date" id="r_from" onchange="render()"></div><div class="dateBox"><span>📅 إلى:</span><input type="date" id="r_to" onchange="render()"></div><button class="ghost dateBtn" onclick="clearFilters();render()">🔄 عرض الكل</button></div>
 <input id="rQuick" placeholder="🔍 بحث سريع... اسم القاطرة أو الصيانة أو القطع أو التكلفة أو الفاتورة">
-<div class="report-actions"><button class="btn full" onclick="showReport()">📋 عرض التقرير</button></div></div>
+<div class="report-actions"><button class="btn full" onclick="openReportChoice()">📋 عرض التقرير</button></div></div>
 <div id="reportDiag" class="card hidden"></div><div id="reportTables" class="hidden"></div><div id="reportLib"></div></section>
 <section data-tab="backup" class="hidden">
 <div class="card"><b>💾 النسخ الاحتياطي - محفوظ داخل التطبيق</b><p style="color:#475569;font-size:13px">النسخة وملف التقرير يحفظان تلقائيا في مجلد (صيانة القواطر) داخل التنزيلات في ملفات هاتفك.</p><button class="btn" onclick="exportBackup()">تصدير نسخة احتياطية الآن</button><button class="btn" onclick="downloadBackupFile()">📥 تحميل النسخة ملف للتلفون</button><br><label style="display:block;margin-top:10px"><b>📂 استيراد نسخة من التلفون (اختر ملف JSON):</b><input type="file" id="backupFile" accept=".json,application/json" onchange="importBackupFile(event)" style="margin-top:6px"></label><div id="backupList"></div></div>
@@ -295,6 +357,8 @@ th{background:linear-gradient(135deg,#1e3a8a,#0f2447)}
 <div id="confirmModal" class="modal"><div class="box"><h3 id="confirmTitle">تأكيد</h3><p id="confirmText" style="font-size:15px;line-height:1.7"></p><button class="btn" style="background:#ef4444;color:#fff" onclick="confirmYes()">🗑️ نعم، احذف</button><button class="ghost" onclick="closeModal('confirmModal')">إلغاء</button></div></div>
 <div id="reportPage"><div class="bar"><b>📋 التقرير</b><button onclick="printReport('landscape')">🖨️ طباعة</button><button class="exportBtn" onclick="exportReportFile()">💾 تصدير</button><button class="closeBtn" onclick="closeReportPage()">✕ إغلاق</button></div><div class="page" id="reportPageContent"></div><div id="reportCopyBar" style="padding:10px"><button class="btn" style="background:#f59e0b" onclick="copyText(document.getElementById('reportPageContent').innerText)">📋 نسخ التقرير</button></div></div>
 
+<div id="ctxOverlay" onclick="hideCtxMenu()"></div>
+<div id="ctxMenu"><button id="ctxEdit" onclick="ctxEdit()">✏️ تعديل</button><button id="ctxDel" class="red" onclick="ctxDel()">🗑️ حذف</button><button onclick="hideCtxMenu()">✕ إلغاء</button></div>
 <!-- ===== Side Drawer ===== -->
 <div id="drawerOverlay" onclick="closeDrawer()"></div>
 <aside id="drawer">
@@ -307,6 +371,7 @@ th{background:linear-gradient(135deg,#1e3a8a,#0f2447)}
 <button class="dItem" onclick="closeDrawer();openSettings()">⚙️ الإعدادات</button>
 <button class="dItem" onclick="closeDrawer();openSettings();setTimeout(()=>{document.getElementById('settingsModal').scrollTop=0},100)">🛡️ الحماية والخصوصية — قفل التطبيق</button>
 <button class="dItem" onclick="closeDrawer();openSettings()">🌐 لغة التطبيق</button>
+<button class="dItem" onclick="closeDrawer();openTheme()">🎨 الثيمات والألوان</button>
 <button class="dItem" onclick="closeDrawer();openAbout()">ℹ️ حول التطبيق</button>
 <button class="dItem" onclick="closeDrawer();openContact()">📞 تواصل معنا</button>
 <button class="dItem" onclick="closeDrawer();managerLogin()">🔑 دخول المدير / تبديل الدور</button>
@@ -349,9 +414,14 @@ th{background:linear-gradient(135deg,#1e3a8a,#0f2447)}
 <button class="setCard" onclick="setTheme('teal')">🩵 تركوازي<div><small>بحري منعش</small></div></button>
 <button class="setCard" onclick="setTheme('purple')">💜 بنفسجي<div><small>فخم وعصري</small></div></button>
 <button class="setCard" onclick="setTheme('orange')">🧡 برتقالي<div><small>دافئ وحيوي</small></div></button>
+<button class="setCard" onclick="setTheme('pink')">🌸 وردي<div><small>ناعم وعصري</small></div></button>
+<button class="setCard" onclick="setTheme('coffee')">☕ قهوة ترابي<div><small>دافئ وكلاسيكي</small></div></button>
 <button class="setCard" onclick="setTheme('dark')">🖤 ليلي داكن<div><small>مريح للعين ليلا</small></div></button>
+<button class="setCard" onclick="setTheme('rose')">🌹 وردي<div><small>ناعم وعصري</small></div></button>
+<button class="setCard" onclick="setTheme('sky')">🌊 أزرق سماوي<div><small>منعش وهادئ</small></div></button>
 <button class="ghost" onclick="closeModal('themeModal')">إغلاق</button></div></div>
 
+<div id="reportChoiceModal" class="modal"><div class="box" style="max-width:520px"><h3>📋 اختر نوع التقرير</h3><button class="btn" onclick="closeModal('reportChoiceModal');showReport()">📋 تقرير الصيانة</button><button class="btn" style="background:linear-gradient(180deg,#38bdf8,#0284c7);color:#fff" onclick="showFuelReport()">⛽ تقرير استهلاك الوقود</button><button class="ghost" onclick="closeModal('reportChoiceModal')">إلغاء</button></div></div>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
@@ -440,7 +510,7 @@ function viewPhoto(id){ let l=S.logs.find(x=>x.id===id); if(!l||!l.invPhoto){ to
 function clearInvPhoto(){ _invPhotoData=''; let pv=document.getElementById('log_invPhotoPrev'); if(pv){ pv.src=''; pv.style.display='none'; } let inp=document.getElementById('log_invPhoto'); if(inp) inp.value=''; }
 /* --- fuel --- */
 function fuelStatsFor(truck){ let list=(S.fuel||[]).filter(f=>truckMatch(f.truck,truck)).slice().sort((a,b)=>(+a.odo||0)-(+b.odo||0)); let liters=list.reduce((a,f)=>a+(+f.liters||0),0); let cost=list.reduce((a,f)=>a+(+f.cost||0),0); let dist=list.length>=2 ? ((+list[list.length-1].odo||0)-(+list[0].odo||0)) : 0; let l100=dist>0? liters/dist*100 : 0; let ckm=dist>0? cost/dist : 0; return {list,liters,cost,dist,l100,ckm}; }
-function renderFuel(){ if(!S.fuel) S.fuel=[]; let fc=document.getElementById('fuelFormCard'); if(fc) fc.style.display=canEditLogs()?'':'none'; let st=document.getElementById('fuelStats'); if(!st) return; st.innerHTML=visibleTrucks().map(t=>{ let s=fuelStatsFor(t.name); let cls=s.l100>45?'⚠️ تأكل فلوس':(s.l100>0&&s.l100<=35?'✅ اقتصادية':'متوسطة'); return '<div class="card"><b>'+t.name+'</b><br>تعبئات: '+s.list.length+' | وقود: '+s.liters.toLocaleString()+' لتر | تكلفة: '+s.cost.toLocaleString()+' ر.ي<br>'+(s.dist>0?'مسافة: '+s.dist.toLocaleString()+' كم | استهلاك: <b>'+s.l100.toFixed(1)+' لتر / 100 كم</b> | تكلفة الكيلو: <b>'+s.ckm.toFixed(1)+' ر.ي / كم</b> | '+cls:'— لا توجد بيانات كافية (سجّل تعبئتين بعدادين مختلفين)')+'</div>'; }).join('')||'لا توجد قواطر'; let fl=document.getElementById('fuelList'); if(fl){ let _fl=(userRole()==='driver'&&driverTruck())? S.fuel.filter(f=>truckMatch(f.truck,driverTruck())) : S.fuel; fl.innerHTML=_fl.slice().reverse().map(f=>'<div class="card"><b>'+f.truck+'</b> — '+f.date+'<br>وقود: '+f.liters+' لتر | تكلفة: '+(+f.cost||0).toLocaleString()+' ر.ي | عداد: '+(f.odo||'-')+' كم<br>'+(canEditLogs()?'<button class="ghost red" onclick="delFuel('+f.id+')">🗑️ حذف</button>':'')+'</div>').join('')||'لا توجد تعبئات بعد'; } }
+function renderFuel(){ if(!S.fuel) S.fuel=[]; let fc=document.getElementById('fuelFormCard'); if(fc) fc.style.display=canEditLogs()?'':'none'; let st=document.getElementById('fuelStats'); if(!st) return; st.innerHTML=visibleTrucks().map(t=>{ let s=fuelStatsFor(t.name); let cls=s.l100>45?'⚠️ تأكل فلوس':(s.l100>0&&s.l100<=35?'✅ اقتصادية':'متوسطة'); return '<div class="card"><b>'+t.name+'</b><br>تعبئات: '+s.list.length+' | وقود: '+s.liters.toLocaleString()+' لتر | تكلفة: '+s.cost.toLocaleString()+' ر.ي<br>'+(s.dist>0?'مسافة: '+s.dist.toLocaleString()+' كم | استهلاك: <b>'+s.l100.toFixed(1)+' لتر / 100 كم</b> | تكلفة الكيلو: <b>'+s.ckm.toFixed(1)+' ر.ي / كم</b> | '+cls:'— لا توجد بيانات كافية (سجّل تعبئتين بعدادين مختلفين)')+'</div>'; }).join('')||'لا توجد قواطر'; let fl=document.getElementById('fuelList'); if(fl){ let _fl=(userRole()==='driver'&&driverTruck())? S.fuel.filter(f=>truckMatch(f.truck,driverTruck())) : S.fuel; fl.innerHTML=_fl.slice().reverse().map(f=>'<div class="card" data-ctx="fuel" data-id="'+f.id+'"><b>'+f.truck+'</b> — '+f.date+'<br>وقود: '+f.liters+' لتر | تكلفة: '+(+f.cost||0).toLocaleString()+' ر.ي | عداد: '+(f.odo||'-')+' كم'+'</div>').join('')||'لا توجد تعبئات بعد'; } }
 function saveFuel(){ if(!canEditLogs()){ toast('صلاحيتك عرض فقط 🔒',1); return; } let truck=document.getElementById('fuel_truck').value; if(!truck){ toast('اختر القاطرة أولا',1); return; } let liters=+document.getElementById('fuel_liters').value||0; if(liters<=0){ toast('اكتب كمية الوقود',1); return; } let odo=document.getElementById('fuel_odo').value; if(!odo){ toast('اكتب عداد القاطرة وقت التعبئة',1); return; } S.fuel.push({id:Date.now(),truck,date:document.getElementById('fuel_date').value||new Date().toISOString().slice(0,10),liters,cost:+document.getElementById('fuel_cost').value||0,odo,updatedAt:Date.now()}); saveLocal(); toast('⛽ تم حفظ تعبئة الوقود ✓'); render(); }
 function delFuel(id){ if(!canEditLogs()){ toast('صلاحيتك عرض فقط 🔒',1); return; } askConfirm('حذف التعبئة؟','',()=>{ S.fuel=S.fuel.filter(f=>f.id!==id); saveLocal(); render(); }); }
 /* --- voice search --- */
@@ -454,11 +524,11 @@ function truckMatch(a,b){let x=norm(a),y=norm(b); if(!x||!y) return false; if(x=
 function tab(n){if(userRole()==='driver'&&n==='backup'){toast('النسخ الاحتياطي للمدير فقط 🔒',1);return;}document.querySelectorAll('[data-tab]').forEach(e=>e.classList.toggle('hidden',e.dataset.tab!==n)); document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.nav===n)); render();}
 function render(){let _ol=document.getElementById('ownerLine'); if(_ol) _ol.textContent='الجرب للأنظمة والبرمجيات | 📞 784693794'; let _ft=document.getElementById('factoryTitle'); if(_ft){_ft.textContent=(S.settings&&S.settings.factory)||'مصنع اسمنت الحديدة'; _ft.style.display=(S.settings&&S.settings.showFactory===false)?'none':'';} let _sm=document.getElementById('set_manager'); if(_sm&&document.activeElement!==_sm) _sm.value=S.settings?.manager||''; let _sp=document.getElementById('set_phone'); if(_sp&&document.activeElement!==_sp) _sp.value=S.settings?.managerPhone||''; let _rl=document.getElementById('set_role'); if(_rl) _rl.value=S.settings?.role||'manager'; let _dt=document.getElementById('set_driverTruck'); if(_dt) _dt.value=S.settings?.driverTruck||''; let _sc=document.getElementById('set_syncCode'); if(_sc) _sc.value=S.settings?.syncCode||''; let _so=document.getElementById('set_syncOn'); if(_so) _so.checked=!!S.settings?.syncOn; syncStatus(syncOn()?'☁️ المزامنة مفعلة — كود: '+syncCode():'⏸️ المزامنة متوقفة');document.getElementById('cTrucks').textContent=visibleTrucks().length; document.getElementById('cLogs').textContent=visibleLogs().length; document.getElementById('cCost').textContent=visibleLogs().reduce((a,l)=>a+(+l.cost||0),0).toLocaleString(); document.getElementById('cOil').textContent=visibleLogs().filter(l=>l.oil).length;
 let bell=document.getElementById('bellBadge'); if(bell){let _max=l=>S.logs.filter(x=>truckMatch(x.truck,l)).reduce((m,x)=>Math.max(m,+x.odo||0),0); let _cnt=visibleTrucks().filter(t=>{let mx=_max(t.name); return (mx-(t.last_oil||0))>=(S.settings?.oil||4000)||(mx-(t.last_grease||0))>=(S.settings?.grease||2000)||(mx-(t.last_air||0))>=(S.settings?.air||1000);}).length; bell.textContent=_cnt; bell.style.display=_cnt>0?'flex':'none';}
-let q=(document.getElementById('qHome').value||'').trim(); document.getElementById('homeTrucks').innerHTML=visibleTrucks().filter(t=>!q||t.name.includes(q)).map(t=>'<div class="card"><b>'+t.name+'</b><br>لوحة: '+(t.plate||'-')+' | سائق: '+(t.driver||'-')+'<br><button class="ghost" data-edit-truck="'+t.id+'">✏️ تعديل</button> <button class="ghost red" data-del-truck="'+t.id+'">🗑️ حذف</button></div>').join('')||'لا توجد قواطر';
+let q=(document.getElementById('qHome').value||'').trim(); document.getElementById('homeTrucks').innerHTML=visibleTrucks().filter(t=>!q||t.name.includes(q)).map(t=>'<div class="card" data-ctx="truck" data-id="'+t.id+'"><b>'+t.name+'</b><br>لوحة: '+(t.plate||'-')+' | سائق: '+(t.driver||'-')+'</div>').join('')||'لا توجد قواطر';
 document.getElementById('alerts').innerHTML=visibleTrucks().map(t=>{let used=(S.logs.filter(l=>truckMatch(l.truck,t.name)).reduce((m,l)=>Math.max(m,+l.odo||0),0))-(t.last_oil||0); let maxOdo=S.logs.filter(l=>truckMatch(l.truck,t.name)).reduce((m,l)=>Math.max(m,+l.odo||0),0); let ug=maxOdo-(t.last_grease||0), ua=maxOdo-(t.last_air||0); return '<div>• '+t.name+' — زيت: '+used.toLocaleString()+' كم / '+(S.settings?.oil||4000)+' | تشحيم: '+ug.toLocaleString()+' كم / '+(S.settings?.grease||2000)+' | هواية: '+ua.toLocaleString()+' كم / '+(S.settings?.air||1000)+'</div>';}).join('');
 document.getElementById('lastLog').textContent=(function(){let _vl=visibleLogs(); return _vl.length? _vl[_vl.length-1].date+' | '+_vl[_vl.length-1].truck+' | '+_vl[_vl.length-1].repair : '—';})();
-document.getElementById('truckList').innerHTML=visibleTrucks().map(t=>'<div class="card"><b>'+t.name+'</b><br>لوحة: '+(t.plate||'-')+' | موديل: '+(t.model||'-')+' | سائق: '+(t.driver||'-')+'<br><button class="ghost" data-edit-truck="'+t.id+'">✏️ تعديل</button> <button class="ghost red" data-del-truck="'+t.id+'">🗑️ حذف</button></div>').join('');
-let fLogs=filteredLogs(); document.getElementById('logList').innerHTML=fLogs.slice().reverse().map(l=>'<div class="card"><b>'+l.truck+'</b> — '+l.date+'<br>'+l.repair+' | قطع: '+l.parts+'<br>تكلفة: '+(+l.cost||0).toLocaleString()+' | زيت: '+(l.oil?'نعم':'لا')+' | تشحيم: '+(l.grease?'نعم':'لا')+' | هواية: '+(l.air?'نعم':'لا')+' | فاتورة: '+(l.inv||'-')+(l.invPhoto?'<br><img src=\"'+l.invPhoto+'\" style=\"width:100%;border-radius:10px;margin-top:6px\"><br><button class=\"ghost\" onclick=\"viewPhoto('+l.id+')\">🖼️ عرض صورة الفاتورة</button>':'')+'<br><button class="ghost" data-edit-log="'+l.id+'">✏️ تعديل سجل</button> <button class="ghost red" data-del-log="'+l.id+'">🗑️ حذف سجل</button></div>').join('')||'<div class="card">لا توجد سجلات مطابقة</div>';
+document.getElementById('truckList').innerHTML=visibleTrucks().map(t=>'<div class="card" data-ctx="truck" data-id="'+t.id+'"><b>'+t.name+'</b><br>لوحة: '+(t.plate||'-')+' | موديل: '+(t.model||'-')+' | سائق: '+(t.driver||'-')+'</div>').join('');
+let fLogs=filteredLogs(); document.getElementById('logList').innerHTML=fLogs.slice().reverse().map(l=>'<div class="card" data-ctx="log" data-id="'+l.id+'"><b>'+l.truck+'</b> — '+l.date+'<br>'+l.repair+' | قطع: '+l.parts+'<br>تكلفة: '+(+l.cost||0).toLocaleString()+' | زيت: '+(l.oil?'نعم':'لا')+' | تشحيم: '+(l.grease?'نعم':'لا')+' | هواية: '+(l.air?'نعم':'لا')+' | فاتورة: '+(l.inv||'-')+(l.invPhoto?'<br><img src=\"'+l.invPhoto+'\" style=\"width:100%;border-radius:10px;margin-top:6px\"><br><button class=\"ghost\" onclick=\"viewPhoto('+l.id+')\">🖼️ عرض صورة الفاتورة</button>':'')+'</div>').join('')||'<div class="card">لا توجد سجلات مطابقة</div>';
 if(!canManageTrucks()) document.querySelectorAll('[data-edit-truck],[data-del-truck]').forEach(b=>b.style.display='none');
 if(!canEditLogs()) document.querySelectorAll('[data-edit-log],[data-del-log]').forEach(b=>b.style.display='none');
 document.querySelectorAll('[data-add-truck]').forEach(b=>b.style.display=canManageTrucks()?'':'none');
@@ -499,13 +569,13 @@ function reportHTML(){let {list}=reportLogs(); let total=list.reduce((a,l)=>a+(+
 let rows='<div class="scroll-table-wrap"><table><thead><tr><th>م</th><th>التاريخ</th><th>القاطرة</th><th>نوع الصيانة</th><th>القطع</th><th>زيت</th><th>تشحيم</th><th>هواية</th><th>العداد</th><th>التكلفة</th><th>الفاتورة</th></tr></thead><tbody>'+_rows+'<tr><td colspan="9"><b>الإجمالي</b></td><td colspan="2"><b>'+total.toLocaleString()+'</b></td></tr></tbody></table></div>'; let perRows=Object.entries(per).map(([k,v])=>'<tr><td>'+k+'</td><td>'+v.n+'</td><td>'+v.c.toLocaleString()+'</td></tr>').join('')||'<tr><td colspan="3">لا توجد سجلات</td></tr>'; return {html:'<div class="doc">'+((S.settings&&S.settings.showFactory===false)?'':'<h2>'+((S.settings&&S.settings.factory)||'مصنع اسمنت الحديدة')+'</h2>')+'<h3>تقرير صيانة القواطر وقطع الغيار</h3><p>تاريخ التقرير: '+new Date().toISOString().slice(0,10)+' | القاطرة: '+(document.getElementById('rep_truck').value||'الكل')+'</p>'+(list.length===0?'<p style="background:#fee2e2;padding:10px;border-radius:10px">⛔ لا توجد سجلات مطابقة لهذا الفلتر. القاطرة المختارة ليس لها سجلات صيانة.</p>':'')+'<p>إجمالي السجلات: '+S.logs.length+' | بعد الفلتر: '+list.length+' | إجمالي التكلفة: '+total.toLocaleString()+'</p><div class="report-hint">↔️ ضع إصبعك على الجدول واسحب يمين ويسار لعرض كل الأعمدة</div>'+rows+''+((S.settings&&S.settings.showSummary===false)?'':'<h3>ملخص التكاليف حسب القاطرة</h3><div class="scroll-table-wrap"><table><thead><tr><th>القاطرة</th><th>عدد السجلات</th><th>إجمالي التكلفة</th></tr></thead><tbody>'+perRows+'</tbody></table></div>')+'<div style="border-top:2px solid #0f2447;margin-top:18px;padding-top:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px"><div><b>مسؤول القواطر: '+(S.settings?.manager||'غير محدد - يحدد من الإعدادات')+'</b><br>📞 التلفون: '+(S.settings?.managerPhone||'—')+'</div><div style="text-align:left"><b>التوقيع:</b><br><br>............................</div></div><p>تم إعداد التقرير من نظام صيانة قواطر النقل — '+(S.settings?.manager||'غير محدد - يحدد من الإعدادات')+' | '+(S.settings?.managerPhone||'—')+'</p></div>',count:list.length,total};}
 function closeReportPage(){document.getElementById('reportPage').classList.remove('open');}
 function showReportPage(html){document.getElementById('reportPageContent').innerHTML=html; document.getElementById('reportPage').classList.add('open'); window.scrollTo(0,0);}
-function showReport(){let r=reportHTML(); S.reports.push({at:new Date().toLocaleString('ar'),count:r.count,html:r.html}); saveLocal(); showReportPage(r.html); toast('تم فتح التقرير في صفحة كاملة ✓ وحفظه في المكتبة'); render();}
-function openSavedReport(i){showReportPage(S.reports[i].html);}
+function showReport(){window._currentReport='maint'; let r=reportHTML(); S.reports.push({at:new Date().toLocaleString('ar'),count:r.count,html:r.html,type:'maint'}); saveLocal(); showReportPage(r.html); toast('تم فتح التقرير في صفحة كاملة ✓ وحفظه في المكتبة'); render();}
+function openSavedReport(i){window._currentReport=S.reports[i].type||'maint'; showReportPage(S.reports[i].html);}
 function delReport(i){S.reports.splice(i,1); saveLocal(); render();}
 
 function downloadFile(name, content, mime){try{if(window.Android&&Android.downloadFile){let b64=btoa(unescape(encodeURIComponent(content))); Android.downloadFile(name,b64); toast('💾 تم الحفظ في مجلد صيانة القواطر: '+name); return;}}catch(e){} let a=document.createElement('a'); let blob=new Blob([content],{type:mime||'text/plain;charset=utf-8'}); let url=URL.createObjectURL(blob); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),2000);}
 function printReport(orient){let c=document.getElementById('reportPageContent').innerHTML; if(!c||!c.trim()){showReport();} setTimeout(()=>{if(window.Android&&Android.printPage){if(orient==='landscape'&&Android.printLandscape){Android.printLandscape();} else {Android.printPage();} toast('🖨️ اختر الطابعة أو اختر حفظ كـ PDF من نافذة الطباعة');} else {window.print(); toast('🖨️ اختر الطابعة من نافذة الطباعة');}},300);}
-function exportReportFile(){let r=reportHTML(); let fac=(S.settings&&S.settings.factory)||'مصنع اسمنت الحديدة'; let doc='<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>تقرير صيانة القواطر - '+fac+'</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;direction:rtl;padding:16px;color:#111;background:#fff}h2{color:#0f2447;margin:4px 0}h3{color:#0f2447;margin:14px 0 6px}.doc{max-width:1000px;margin:0 auto}.scroll-table-wrap{overflow:visible;width:100%}table{width:100%;border-collapse:collapse;table-layout:fixed}th{background:#0f2447;color:#fff;padding:6px 4px;font-size:12px;border:1px solid #333}td{border:1px solid #999;padding:5px 4px;font-size:12px;word-break:break-word;overflow-wrap:break-word;text-align:right}tr:nth-child(even) td{background:#f8fafc}p{font-size:13px;line-height:1.7}@media print{body{padding:0}table{page-break-inside:auto}tr{page-break-inside:avoid}}</style></head><body><div class="doc">'+r.html+'</div></body></html>'; let n='تقرير-القواطر-'+new Date().toISOString().slice(0,10)+'.html'; downloadFile(n,doc,'text/html;charset=utf-8'); toast('💾 تم حفظ التقرير كاملا في مجلد صيانة القواطر - افتحه من ملفاتي');}
+function exportReportFile(){let _isFuel=window._currentReport==='fuel'; let r=_isFuel?fuelReportHTML():reportHTML(); let fac=(S.settings&&S.settings.factory)||'مصنع اسمنت الحديدة'; let doc='<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>'+(_isFuel?'تقرير استهلاك الوقود - ':'تقرير صيانة القواطر - ')+fac+'</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;direction:rtl;padding:16px;color:#111;background:#fff}h2{color:#0f2447;margin:4px 0}h3{color:#0f2447;margin:14px 0 6px}.doc{max-width:1000px;margin:0 auto}.scroll-table-wrap{overflow:visible;width:100%}table{width:100%;border-collapse:collapse;table-layout:fixed}th{background:#0f2447;color:#fff;padding:6px 4px;font-size:12px;border:1px solid #333}td{border:1px solid #999;padding:5px 4px;font-size:12px;word-break:break-word;overflow-wrap:break-word;text-align:right}tr:nth-child(even) td{background:#f8fafc}p{font-size:13px;line-height:1.7}@media print{body{padding:0}table{page-break-inside:auto}tr{page-break-inside:avoid}}</style></head><body><div class="doc">'+r.html+'</div></body></html>'; let n=(_isFuel?'تقرير-الوقود-':'تقرير-القواطر-')+new Date().toISOString().slice(0,10)+'.html'; downloadFile(n,doc,'text/html;charset=utf-8'); toast('💾 تم حفظ التقرير كاملا في مجلد صيانة القواطر - افتحه من ملفاتي');}
 function downloadBackupFile(){let data={app:'صيانة القواطر',at:new Date().toISOString(),data:JSON.parse(JSON.stringify(S))}; let n='نسخة-احتياطية-القواطر-'+new Date().toISOString().slice(0,10)+'.json'; downloadFile(n,JSON.stringify(data),'application/json'); toast('📥 تم تنزيل النسخة - مجلد صيانة القواطر في التنزيلات');}
 function importBackupFile(ev){let f=ev.target.files&&ev.target.files[0]; if(!f) return; let rd=new FileReader(); rd.onload=function(){try{let j=JSON.parse(rd.result); let d=j.data||j; if(!d.trucks||!d.logs) throw 0; S=d; saveLocal(); toast('تم الاستيراد من الملف - قواطر: '+S.trucks.length+' | سجلات: '+S.logs.length); render();}catch(e){toast('الملف ليس نسخة صحيحة',1);}}; rd.readAsText(f);}
 
@@ -673,10 +743,48 @@ function openExternal(url){try{if(window.Android&&Android.openExternal){Android.
 
 const _origRender2 = render; render = function(){ _origRender2(); translatePage((S.settings&&S.settings.lang)||'ar'); };
 
+
+/* ===== قائمة الضغط المطوّل على البطاقات ===== */
+let _ctx={type:'',id:0};
+function showCtxMenu(type,id,x,y){ _ctx={type,id}; let m=document.getElementById('ctxMenu'); let ed=document.getElementById('ctxEdit'); if(ed) ed.style.display=(type==='fuel')?'none':''; m.style.left=Math.min(x,window.innerWidth-190)+'px'; m.style.top=Math.min(y,window.innerHeight-160)+'px'; document.getElementById('ctxOverlay').classList.add('open'); m.classList.add('open'); }
+function hideCtxMenu(){ let m=document.getElementById('ctxMenu'); if(m) m.classList.remove('open'); let o=document.getElementById('ctxOverlay'); if(o) o.classList.remove('open'); }
+function ctxEdit(){ let t=_ctx.type,id=_ctx.id; hideCtxMenu(); if(t==='truck') editTruck(id); else if(t==='log') editLog(id); }
+function ctxDel(){ let t=_ctx.type,id=_ctx.id; hideCtxMenu(); if(t==='truck') delTruck(id); else if(t==='log') delLog(id); else if(t==='fuel') delFuel(id); }
+function ctxAllowed(type){ if(type==='truck'&&!canManageTrucks()){ toast('التعديل والحذف للمدير فقط 🔒',1); return false; } if((type==='log'||type==='fuel')&&!canEditLogs()){ toast('صلاحيتك عرض فقط 🔒',1); return false; } return true; }
+document.addEventListener('contextmenu',function(e){ let card=e.target.closest&&e.target.closest('[data-ctx]'); if(!card) return; e.preventDefault(); let m=document.getElementById('ctxMenu'); if(m&&m.classList.contains('open')) return; let type=card.dataset.ctx,id=+card.dataset.id; if(!ctxAllowed(type)) return; showCtxMenu(type,id,e.clientX,e.clientY); });
+let _lpTimer=null,_lpX=0,_lpY=0,_lpCard=null;
+document.addEventListener('touchstart',function(e){ let card=e.target.closest&&e.target.closest('[data-ctx]'); _lpCard=card||null; if(!card||!e.touches.length) return; _lpX=e.touches[0].clientX; _lpY=e.touches[0].clientY; _lpTimer=setTimeout(function(){ if(!_lpCard) return; let type=_lpCard.dataset.ctx,id=+_lpCard.dataset.id; if(!ctxAllowed(type)) return; showCtxMenu(type,id,_lpX,_lpY); },500); },{passive:true});
+document.addEventListener('touchmove',function(){ if(_lpTimer){clearTimeout(_lpTimer);_lpTimer=null;} },{passive:true});
+document.addEventListener('touchend',function(){ if(_lpTimer){clearTimeout(_lpTimer);_lpTimer=null;} },{passive:true});
+/* ===== تقرير استهلاك الوقود ===== */
+function openReportChoice(){ document.getElementById('reportChoiceModal').classList.add('open'); }
+function showFuelReport(){ closeModal('reportChoiceModal'); window._currentReport='fuel'; let r=fuelReportHTML(); S.reports.push({at:new Date().toLocaleString('ar'),count:r.count,html:r.html,type:'fuel'}); saveLocal(); showReportPage(r.html); toast('⛽ تم فتح تقرير استهلاك الوقود ✓ وحفظه في المكتبة'); render(); }
+function fuelReportHTML(){ let rt=document.getElementById('rep_truck')?.value||''; let rf=document.getElementById('r_from')?.value||''; let rto=document.getElementById('r_to')?.value||''; let list=(S.fuel||[]).filter(f=>{ return (!rt||truckMatch(f.truck,rt))&&(!rf||f.date>=rf)&&(!rto||f.date<=rto); }); let per={}; list.forEach(f=>{ let k=S.trucks.find(t=>truckMatch(f.truck,t.name))?.name||f.truck; per[k]=per[k]||{n:0,liters:0,cost:0,first:null,last:null}; per[k].n++; per[k].liters+=+f.liters||0; per[k].cost+=+f.cost||0; let o=+f.odo||0; if(per[k].first===null||o<per[k].first) per[k].first=o; if(per[k].last===null||o>per[k].last) per[k].last=o; }); let totalLiters=list.reduce((a,f)=>a+(+f.liters||0),0), totalCost=list.reduce((a,f)=>a+(+f.cost||0),0); let perRows=Object.entries(per).map(([k,v])=>{ let dist=(v.n>=2)?(v.last-v.first):0; let l100=dist>0?v.liters/dist*100:0; let ckm=dist>0?v.cost/dist:0; let cls=l100>45?'⚠️ تأكل فلوس':(l100>0&&l100<=35?'✅ اقتصادية':'متوسطة'); return '<tr><td>'+k+'</td><td>'+v.n+'</td><td>'+v.liters.toLocaleString()+'</td><td>'+v.cost.toLocaleString()+'</td><td>'+(dist>0?dist.toLocaleString():'—')+'</td><td>'+(dist>0?l100.toFixed(1):'—')+'</td><td>'+(dist>0?ckm.toFixed(1):'—')+'</td><td>'+cls+'</td></tr>'; }).join('')||'<tr><td colspan="8">لا توجد تعبئات</td></tr>'; let rows=list.slice().sort((a,b)=>a.date<b.date?-1:1).map((f,i)=>'<tr><td>'+(i+1)+'</td><td class="date">'+f.date+'</td><td>'+f.truck+'</td><td>'+f.liters+'</td><td>'+((+f.cost||0).toLocaleString())+'</td><td>'+(f.odo||'-')+'</td></tr>').join('')||'<tr><td colspan="6">لا توجد تعبئات لهذا الفلتر</td></tr>'; return {count:list.length, html:'<div class="doc">'+((S.settings&&S.settings.showFactory===false)?'':'<h2>'+((S.settings&&S.settings.factory)||'مصنع اسمنت الحديدة')+'</h2>')+'<h3>⛽ تقرير استهلاك الوقود لكل قاطرة</h3><p>تاريخ التقرير: '+new Date().toISOString().slice(0,10)+' | القاطرة: '+(rt||'الكل')+' | من: '+(rf||'الكل')+' إلى: '+(rto||'الكل')+'</p><p>إجمالي التعبئات: '+list.length+' | إجمالي الوقود: '+totalLiters.toLocaleString()+' لتر | إجمالي التكلفة: '+totalCost.toLocaleString()+' ر.ي</p><h3>ملخص الاستهلاك حسب القاطرة</h3><div class="scroll-table-wrap"><table><thead><tr><th>القاطرة</th><th>تعبئات</th><th>وقود (لتر)</th><th>تكلفة (ر.ي)</th><th>مسافة (كم)</th><th>لتر / 100 كم</th><th>ر.ي / كم</th><th>التقييم</th></tr></thead><tbody>'+perRows+'</tbody></table></div><h3>تفاصيل التعبئات</h3><div class="scroll-table-wrap"><table><thead><tr><th>م</th><th>التاريخ</th><th>القاطرة</th><th>لتر</th><th>تكلفة (ر.ي)</th><th>العداد</th></tr></thead><tbody>'+rows+'</tbody></table></div><div style="border-top:2px solid #0f2447;margin-top:18px;padding-top:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px"><div><b>مسؤول القواطر: '+(S.settings?.manager||'غير محدد - يحدد من الإعدادات')+'</b><br>📞 التلفون: '+(S.settings?.managerPhone||'—')+'</div><div style="text-align:left"><b>التوقيع:</b><br><br>............................</div></div></div>'}; }
+
 /* ===== Swipe left/right to switch tabs ===== */
 let _swipeX=0,_swipeY=0;
 document.addEventListener('touchstart',function(e){ if(e.touches.length!==1) return; _swipeX=e.touches[0].clientX; _swipeY=e.touches[0].clientY; },{passive:true});
 document.addEventListener('touchend',function(e){ if(!_swipeX) return; let dx=e.changedTouches[0].clientX-_swipeX, dy=e.changedTouches[0].clientY-_swipeY; _swipeX=0; if(Math.abs(dx)<70||Math.abs(dy)>60) return; if(document.querySelector('.modal.open')) return; if(document.getElementById('drawer').classList.contains('open')) return; if(_swipeX>window.innerWidth-50) return; if(e.target.closest('input,textarea,select,button')) return; let order=['home','trucks','maint','fuel','reports','backup']; let cur=document.querySelector('section[data-tab]:not(.hidden)'); let curName=cur?cur.dataset.tab:'home'; let ix=order.indexOf(curName); if(ix<0) return; let nx=dx>0? ix+1 : ix-1; if(nx<0||nx>=order.length) return; tab(order[nx]); },{passive:true});
+
+
+/* ===== زر الرجوع: يقفل القائمة/النافذة بدل الخروج ===== */
+function closeTopLayer(){
+  let ls=document.getElementById('lockScreen');
+  if(ls&&ls.classList.contains('open')) return true;
+  let co=document.getElementById('ctxOverlay');
+  if(co&&co.classList.contains('open')){ hideCtxMenu(); return true; }
+  let rp=document.getElementById('reportPage');
+  if(rp&&rp.classList.contains('open')){ closeReportPage(); return true; }
+  let dr=document.getElementById('drawer');
+  if(dr&&dr.classList.contains('open')){ closeDrawer(); return true; }
+  let m=document.querySelector('.modal.open');
+  if(m){ m.classList.remove('open'); return true; }
+  let lf=document.getElementById('logForm');
+  if(lf&&!lf.classList.contains('hidden')){ hideLogForm(); return true; }
+  let tf=document.getElementById('truckForm');
+  if(tf&&!tf.classList.contains('hidden')){ hideTruckForm(); return true; }
+  return false;
+}
 
 load(); migrateOwner(); if(!S.fuel) S.fuel=[]; render(); applyLang(); applyTheme(); checkLockOnStart(); setTimeout(initSync, 1200); initPhotoInput();
 
