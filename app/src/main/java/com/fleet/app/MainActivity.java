@@ -254,11 +254,25 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            webView.goBack();
-        } else {
+        // Back button: close the top layer (lock / context menu / report page /
+        // drawer / modal / log form / truck form) FIRST. Only exit when nothing is open.
+        if (webView == null) {
             super.onBackPressed();
+            return;
         }
+        webView.evaluateJavascript("closeTopLayer()", value -> {
+            if (!"true".equals(value)) {
+                if (webView.canGoBack()) {
+                    webView.goBack();
+                } else {
+                    MainActivity.super.onBackPressed();
+                }
+            }
+        });
+    }
+
+    private void doDefaultBack() {
+        super.onBackPressed();
     }
 
     @Override
