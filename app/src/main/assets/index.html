@@ -164,13 +164,14 @@ body[data-theme="dark"] nav button{color:#cbd5e1}
 .dateBox span{white-space:nowrap;font-weight:700;color:#1e3a8a;font-size:15px}
 .dateBox input[type=date]{flex:1;border:0;outline:0;background:transparent;min-width:0;width:100%;padding:0;font-size:15px;font-family:inherit;color:#0f172a}
 .dateBtn{flex:1;height:48px;box-sizing:border-box;display:flex;align-items:center;justify-content:center}
+.dateBtn{white-space:nowrap;font-size:14px;padding-left:4px;padding-right:4px}
 </style></head><body>
 <header><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div><h1>🚛 نظام صيانة قواطر النقل</h1><div id="factoryTitle" style="font-size:22px;font-weight:900;line-height:1.15">مصنع اسمنت الحديدة</div><small>إدارة الأسطول • الصيانة • التنبيهات</small><br><small id="ownerLine" style="color:#fde68a;font-weight:800;font-size:14px">الجرب للأنظمة والبرمجيات | 📞 784693794</small></div><div style="display:flex;gap:8px;flex-shrink:0"><button onclick="tab('backup')" title="النسخ" style="width:46px;height:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px">🗄️</button><button onclick="openSettings()" title="الإعدادات" style="width:46px;height:46px;border-radius:14px;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:22px">⚙️</button><button onclick="openAlerts()" title="التنبيهات" style="position:relative;width:46px;height:46px;border-radius:14px;border:0;background:#f59e0b;color:#111;font-size:22px">🔔<span id="bellBadge" style="position:absolute;top:-6px;left:-4px;background:#ef4444;color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px">0</span></button></div></div><br><span id="lastSave" class="pill">آخر حفظ: —</span></header>
 <div id="msg"></div><main>
 <section data-tab="home">
 
 <div class="row"><div class="stat"><b id="cTrucks">0</b><span>قاطرة</span></div><div class="stat"><b id="cLogs">0</b><span>سجل صيانة</span></div><div class="stat"><b id="cOil">0</b><span>تغيير زيت</span></div></div><div class="row"><div class="stat wide"><b id="cCost">0</b><span>إجمالي التكلفة</span></div></div>
-<div class="card"><b>🔍 بحث سريع</b><input id="qHome" placeholder="ابحث باسم القاطرة أو الصيانة أو القطع..."><button class="ghost" onclick="voiceSearch('qHome')">🎤 بحث بالصوت</button></div>
+<div class="card"><b>🔍 بحث سريع</b><input id="qHome" placeholder="ابحث باسم القاطرة أو الصيانة أو القطع..."></div>
 <div class="card"><b>⚠️ تنبيهات الزيت (كل 4000 كم)</b><div id="alerts"></div></div>
 <div class="card"><b>آخر سجل محفوظ</b><div id="lastLog">—</div></div>
 <div class="card"><b>القواطر</b><div id="homeTrucks"></div></div></section>
@@ -469,7 +470,7 @@ function openDrawer(){document.getElementById('drawer').classList.add('open');do
 function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawerOverlay').classList.remove('open');}
 let _swX=null,_swY=null;
 document.addEventListener('touchstart',e=>{let t=e.touches[0];_swX=t.clientX;_swY=t.clientY;},{passive:true});
-document.addEventListener('touchend',e=>{if(_swX===null)return;let t=e.changedTouches[0];let dx=t.clientX-_swX,dy=t.clientY-_swY;let drawerOpen=document.getElementById('drawer').classList.contains('open');if(!drawerOpen&&dx<-70&&Math.abs(dy)<60)openDrawer();else if(drawerOpen&&dx>70&&Math.abs(dy)<60)closeDrawer();_swX=null;},{passive:true});
+document.addEventListener('touchend',e=>{if(_swX===null)return;let t=e.changedTouches[0];let dx=t.clientX-_swX,dy=t.clientY-_swY;let drawerOpen=document.getElementById('drawer').classList.contains('open');if(!drawerOpen&&_swX>window.innerWidth-50&&dx<-70&&Math.abs(dy)<60)openDrawer();else if(drawerOpen&&dx>70&&Math.abs(dy)<60)closeDrawer();_swX=null;},{passive:true});
 function openAbout(){document.getElementById('aboutModal').classList.add('open');}
 function openContact(){document.getElementById('contactModal').classList.add('open');}
 /* ===== Language ===== */
@@ -616,6 +617,12 @@ function setTheme(t){if(!S.settings) S.settings={}; S.settings.theme=t; applyThe
 function openExternal(url){try{if(window.Android&&Android.openExternal){Android.openExternal(url);return;}}catch(e){} window.location.href=url;}
 
 const _origRender2 = render; render = function(){ _origRender2(); translatePage((S.settings&&S.settings.lang)||'ar'); };
+
+/* ===== Swipe left/right to switch tabs ===== */
+let _swipeX=0,_swipeY=0;
+document.addEventListener('touchstart',function(e){ if(e.touches.length!==1) return; _swipeX=e.touches[0].clientX; _swipeY=e.touches[0].clientY; },{passive:true});
+document.addEventListener('touchend',function(e){ if(!_swipeX) return; let dx=e.changedTouches[0].clientX-_swipeX, dy=e.changedTouches[0].clientY-_swipeY; _swipeX=0; if(Math.abs(dx)<70||Math.abs(dy)>60) return; if(document.querySelector('.modal.open')) return; if(document.getElementById('drawer').classList.contains('open')) return; if(_swipeX>window.innerWidth-50) return; if(e.target.closest('input,textarea,select,button')) return; let order=['home','trucks','maint','fuel','reports','backup']; let cur=document.querySelector('section[data-tab]:not(.hidden)'); let curName=cur?cur.dataset.tab:'home'; let ix=order.indexOf(curName); if(ix<0) return; let nx=dx>0? ix+1 : ix-1; if(nx<0||nx>=order.length) return; tab(order[nx]); },{passive:true});
+
 load(); migrateOwner(); if(!S.fuel) S.fuel=[]; render(); applyLang(); applyTheme(); checkLockOnStart(); setTimeout(initSync, 1200); initPhotoInput();
 
 function migrateOwner(){try{if(!S.settings) S.settings={}; S.settings.owner='الجرب للأنظمة والبرمجيات'; S.settings.ownerPhone='784693794'; if(S.settings.manager==='الجرب'&&!S.settings._managerFixed){S.settings.manager=''; S.settings._managerFixed=1;} if(S.settings.phone&&!S.settings.managerPhone){S.settings.managerPhone=S.settings.phone;} delete S.settings.phone; saveLocal();}catch(e){}}
