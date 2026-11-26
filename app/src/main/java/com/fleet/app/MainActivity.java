@@ -10,6 +10,8 @@ import android.os.Environment;
 import android.print.PrintAttributes;
 import android.print.PrintManager;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
+import java.util.ArrayList;
 import android.util.Base64;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
@@ -27,6 +29,7 @@ public class MainActivity extends Activity {
     private WebView webView;
     private ValueCallback<Uri[]> filePathCallback;
     private static final int FILE_CHOOSER_REQUEST = 1001;
+    private static final int VOICE_REQUEST = 1002;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +119,21 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface
+        public void startVoice() {
+            runOnUiThread(() -> {
+                try {
+                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ar-SA");
+                    intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "تكلم الان... اسم القاطرة");
+                    startActivityForResult(intent, VOICE_REQUEST);
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, "البحث الصوتي غير متوفر في هذا الجهاز", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        @JavascriptInterface
         public void printLandscape() {
             runOnUiThread(() -> {
                 try {
@@ -181,6 +199,18 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == VOICE_REQUEST) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                if (results != null && !results.isEmpty()) {
+                    String text = results.get(0).replace("\\", "\\\\").replace("'", "\\'").replace("\n", " ").replace("\r", " ");
+                    webView.evaluateJavascript("if(window.onVoiceResult) onVoiceResult('" + text + "')", null);
+                }
+            } else {
+                Toast.makeText(this, "لم اسمعك - حاول مرة اخرى", Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }
         if (requestCode == FILE_CHOOSER_REQUEST) {
             if (filePathCallback != null) {
                 Uri[] results = null;
